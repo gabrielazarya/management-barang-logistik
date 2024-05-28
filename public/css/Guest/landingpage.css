@@ -1,0 +1,111 @@
+.landing-page {
+    position: relative;
+    width: 100%;
+    height: 70vh;
+    overflow: hidden;
+}
+
+.landing-page-2 {
+    position: relative;
+    width: 100%;
+    height: 50vh;
+    overflow: hidden;
+}
+
+.background-image {
+    position: absolute;
+    background-image: url("/images/landing-page.png");
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+.dark-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.judul-home {
+    font-weight: 700;
+    color: rgb(255, 255, 255);
+}
+
+.content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #ff0015;
+    font-weight: 500;
+    z-index: 1;
+}
+
+.content-2 {
+    position: absolute;
+    top: 58%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #ff0015;
+    font-weight: 500;
+    z-index: 1;
+}
+
+.content h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.content-2 h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.content p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.content-2 p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-weight: 500;
+    background-color: #fff;
+    color: #333;
+    text-decoration: none;
+    border-radius: 10px;
+}
+
+.login-register-uwu {
+}
+
+.login-register-button-uwu {
+    text-decoration: none;
+    color: #000;
+    background-color: #9f1521;
+    color: #f8f8f8;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+.login-register-button-uwu:hover {
+    text-decoration: none;
+    color: #000;
+    background-color: #92141e;
+    color: #d9d9d9;
+    border-radius: 5px;
+    font-weight: 600;
+}

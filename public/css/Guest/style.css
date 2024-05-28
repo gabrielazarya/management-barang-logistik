@@ -1,0 +1,106 @@
+h1 {
+    color: rgb(0, 0, 0);
+    letter-spacing: -0.2px;
+}
+
+.ininavbar {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+}
+
+.navbartext {
+    font-weight: 500;
+    font-size: 16px;
+    color: rgb(0, 0, 0) !important;
+    text-decoration: none;
+}
+
+.navbartext:hover {
+    color: #9f1521 !important;
+    border-bottom: 4px solid #9f1521;
+}
+
+.nav-link.active {
+    color: #9f1521 !important;
+    border-bottom: 4px solid #9f1521;
+}
+
+.nav-item {
+    padding: 10px;
+}
+
+.navbar {
+    position: fixed !important;
+    width: 100%;
+    z-index: 1000;
+}
+
+.layout-home {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.home-indicator {
+    color: #ffffff;
+    background-color: #9f1521;
+}
+
+.home-indicator i {
+    font-size: 40px;
+}
+
+.konten {
+    padding-top: 50px;
+}
+
+.heading-home {
+    color: #9f1521;
+    font-weight: 645;
+    font-size: 36px;
+    letter-spacing: -0.3px;
+}
+
+.image-tentang {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.layanan-logistik-icon {
+    font-size: 82px !important;
+    color: #9f1521;
+}
+
+.cara-home {
+    font-size: 42px !important;
+    color: #9f1521;
+}
+
+.btn.merah {
+    background-color: #9f1521;
+    color: #ffffff;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    width: fit-content;
+}
+
+.btn.merah:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.inifooter {
+    background-color: #9f1521;
+    color: white;
+}
+
+.footerhover {
+    color: white;
+}
+
+.footerhover:hover {
+    color: rgb(172, 172, 172);
+}
