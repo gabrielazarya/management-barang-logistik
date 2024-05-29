@@ -13,14 +13,14 @@ Route::get('/tentang', [GuestController::class, 'tentang'])->name('guestTentang'
 
 // admin view
 Route::get('/informasi', [AdminController::class, 'informasi'])->name('informasi')->middleware(RoleMiddleware::class . ':admin');
+Route::get('/tambah', [AdminController::class, 'tambah'])->name('tambah')->middleware(RoleMiddleware::class . ':admin');
+Route::get('/konfirmasi', [AdminController::class, 'konfirmasi'])->name('konfirmasi')->middleware(RoleMiddleware::class . ':admin');
+Route::get('/riwayat', [AdminController::class, 'riwayat'])->name('adminRiwayat')->middleware(RoleMiddleware::class . ':admin');
 
 // user view
 Route::get('/ketersediaan', [UserController::class, 'ketersediaan'])->name('ketersediaan')->middleware(RoleMiddleware::class . ':user');
-
-
-// Route::get('/', function() {
-//     return view('welcome');
-// });
+Route::get('/pinjam', [UserController::class, 'pinjam'])->name('pinjam')->middleware(RoleMiddleware::class . ':user');
+Route::get('/riwayat-peminjaman', [UserController::class, 'riwayat'])->name('userRiwayat')->middleware(RoleMiddleware::class . ':user');
 
 
 Route::middleware('auth')->group(function () {

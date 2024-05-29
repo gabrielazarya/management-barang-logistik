@@ -12,6 +12,7 @@
                 </div>
 
                 <!-- Navigation Links -->
+                <!-- ADMIN -->
                 @if (auth()->user()->role === 'admin')
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link :href="route('informasi')" :active="request()->routeIs('informasi')">
@@ -19,20 +20,22 @@
                         </x-nav-link>
                     </div>
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link :href="route('informasi')" :active="request()->routeIs('informasi')">
+                        <x-nav-link :href="route('tambah')" :active="request()->routeIs('tambah')">
                             {{ __('Tambah Barang') }}
                         </x-nav-link>
                     </div>
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link :href="route('informasi')" :active="request()->routeIs('informasi')">
+                        <x-nav-link :href="route('konfirmasi')" :active="request()->routeIs('konfirmasi')">
                             {{ __('Konfirmasi Barang') }}
                         </x-nav-link>
                     </div>
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link :href="route('informasi')" :active="request()->routeIs('informasi')">
+                        <x-nav-link :href="route('adminRiwayat')" :active="request()->routeIs('adminRiwayat')">
                             {{ __('Riwayat') }}
                         </x-nav-link>
                     </div>
+
+                    <!-- USER -->
                 @elseif (auth()->user()->role === 'user')
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link :href="route('ketersediaan')" :active="request()->routeIs('ketersediaan')">
@@ -40,18 +43,13 @@
                         </x-nav-link>
                     </div>
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link :href="route('ketersediaan')" :active="request()->routeIs('ketersediaan')">
-                            {{ __('Informasi Barang') }}
+                        <x-nav-link :href="route('pinjam')" :active="request()->routeIs('pinjam')">
+                            {{ __('Pinjam Barang') }}
                         </x-nav-link>
                     </div>
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link :href="route('ketersediaan')" :active="request()->routeIs('ketersediaan')">
-                            {{ __('Konfirmasi Barang') }}
-                        </x-nav-link>
-                    </div>
-                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                        <x-nav-link :href="route('ketersediaan')" :active="request()->routeIs('ketersediaan')">
-                            {{ __('Riwayat') }}
+                        <x-nav-link :href="route('userRiwayat')" :active="request()->routeIs('userRiwayat')">
+                            {{ __('Riwayat Peminjaman') }}
                         </x-nav-link>
                     </div>
                 @endif
@@ -113,11 +111,47 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('informasi')" :active="request()->routeIs('informasi')">
-                {{ __('Informasi Barang') }}
-            </x-responsive-nav-link>
-        </div>
+        <!-- ADMIN -->
+        @if (auth()->user()->role === 'admin')
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('informasi')" :active="request()->routeIs('informasi')">
+                    {{ __('Informasi Barang') }}
+                </x-responsive-nav-link>
+            </div>
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('tambah')" :active="request()->routeIs('tambah')">
+                    {{ __('Tambah Barang') }}
+                </x-responsive-nav-link>
+            </div>
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('konfirmasi')" :active="request()->routeIs('konfirmasi')">
+                    {{ __('Konfirmasi Barang') }}
+                </x-responsive-nav-link>
+            </div>
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('adminRiwayat')" :active="request()->routeIs('adminRiwayat')">
+                    {{ __('Riwayat') }}
+                </x-responsive-nav-link>
+            </div>
+
+            <!-- USER -->
+        @elseif (auth()->user()->role === 'user')
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('ketersediaan')" :active="request()->routeIs('ketersediaan')">
+                    {{ __('Barang yang Tersedia') }}
+                </x-responsive-nav-link>
+            </div>
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('pinjam')" :active="request()->routeIs('pinjam')">
+                    {{ __('Pinjam Barang') }}
+                </x-responsive-nav-link>
+            </div>
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('userRiwayat')" :active="request()->routeIs('userRiwayat')">
+                    {{ __('Riwayat Peminjaman') }}
+                </x-responsive-nav-link>
+            </div>
+        @endif
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
