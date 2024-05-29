@@ -8,7 +8,8 @@
 
     <title>{{ __('Peminjaman Barang Logistik') }}</title>
     <link rel="" href="{{ asset('images/logo-icon.png') }}" type="image/png">
-
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />

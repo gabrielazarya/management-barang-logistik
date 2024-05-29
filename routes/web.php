@@ -6,6 +6,7 @@ use App\Http\Controllers\GuestController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Middleware\RoleMiddleware;
+use App\Http\Controllers\BarangController;
 
 // guest view
 Route::get('/', [GuestController::class, 'index'])->name('guestDashboard');
@@ -14,6 +15,7 @@ Route::get('/tentang', [GuestController::class, 'tentang'])->name('guestTentang'
 // admin view
 Route::get('/informasi', [AdminController::class, 'informasi'])->name('informasi')->middleware(RoleMiddleware::class . ':admin');
 Route::get('/tambah', [AdminController::class, 'tambah'])->name('tambah')->middleware(RoleMiddleware::class . ':admin');
+Route::post('/tambah', [AdminController::class, 'tambahData'])->name('tambahData')->middleware(RoleMiddleware::class . ':admin');
 Route::get('/konfirmasi', [AdminController::class, 'konfirmasi'])->name('konfirmasi')->middleware(RoleMiddleware::class . ':admin');
 Route::get('/riwayat', [AdminController::class, 'riwayat'])->name('adminRiwayat')->middleware(RoleMiddleware::class . ':admin');
 
