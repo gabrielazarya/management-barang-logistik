@@ -1,0 +1,144 @@
+/* tentang.css */
+#about-us {
+    padding: 60px 0;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+#about-us h2 {
+    color: #9f1521;
+    font-weight: 700;
+    font-size: 36px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#about-us p {
+    color: #333;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+#about-us .img-fluid {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#about-us .img-fluid:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+#about-us .col-lg-6 {
+    margin-bottom: 30px;
+}
+
+#about-us .highlight {
+    color: #9f1521;
+    font-weight: 600;
+}
+
+@media (min-width: 992px) {
+    #about-us .col-lg-6 {
+        margin-bottom: 0;
+    }
+}
+
+/* Buttons */
+#about-us .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-weight: 500;
+    background-color: #9f1521;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#about-us .btn:hover {
+    background-color: #7d101b;
+    color: #f8f8f8;
+}
+
+.text-center.mt-4 {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+/* Team Section */
+.team-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.team-section .column {
+    flex: 1 1 30%;
+    max-width: 30%;
+    box-sizing: border-box;
+    padding: 0 8px;
+    margin-bottom: 16px;
+}
+
+.team-section .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: 8px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.team-section .card img {
+    width: 100%;
+    height: auto;
+    border-bottom: 2px solid #9f1521;
+}
+
+.team-section .container {
+    padding: 16px;
+    text-align: center;
+}
+
+.team-section .title {
+    font-size: 1.2rem;
+    color: #9f1521;
+}
+
+.team-section .button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-weight: 500;
+    background-color: #9f1521;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.team-section .button:hover {
+    background-color: #7d101b;
+    color: #f8f8f8;
+}
+
+@media (max-width: 992px) {
+    .team-section .column {
+        flex: 1 1 45%;
+        max-width: 45%;
+    }
+}
+
+@media (max-width: 576px) {
+    .team-section .column {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+
+    #about-us .col-lg-6 img {
+        margin-top: 20px;
+    }
+}

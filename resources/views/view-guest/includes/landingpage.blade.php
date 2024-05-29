@@ -30,14 +30,14 @@
             <p>Profil Peminjam barang logistik Telkom University Surabaya</p>
         </div>
     </div>
-@elseif(Request::is('riwayat'))
+@elseif(Request::is('tentang'))
     <div class="landing-page-2">
         <div class="background-image">
             <div class="dark-overlay"></div>
         </div>
         <div class="content-2 konten">
-            <h2 class="judul-home">Riwayat Peminjaman Barang Logistik</h2>
-            <p>Riwayat Peminjaman barang logistik Telkom University Surabaya</p>
+            <h2 class="judul-home">Tentang Kami</h2>
+            <p>Tentang Peminjaman barang logistik Telkom University Surabaya</p>
         </div>
     </div>
 @else
