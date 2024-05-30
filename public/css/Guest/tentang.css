@@ -46,6 +46,18 @@
     font-weight: 600;
 }
 
+.card {
+    border: 1px solid ;
+    border-radius: 2%;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-shadow: 2px 2px 5px #9f1521; /* Box shadow with red color */
+}
+
+.card-body {
+    color: #333;
+}
+
 @media (min-width: 992px) {
     #about-us .col-lg-6 {
         margin-bottom: 0;

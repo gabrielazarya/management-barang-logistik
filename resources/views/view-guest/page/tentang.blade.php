@@ -8,43 +8,39 @@
             <div class="heading-home mb-2 text-center">Tentang Logistik</div>
             <div class="mt-4 row">
                 <div class="col-lg-12">
-                    <p>
-                        Kami menyediakan layanan peminjaman barang untuk memenuhi kebutuhan Anda.
-                        Dengan sistem yang mudah digunakan, kami memastikan bahwa Anda dapat meminjam berbagai
-                        barang
-                        dengan cepat dan efisien.
-                    </p>
-                    <p>
-                        Komitmen kami dalam menyediakan layanan peminjaman barang juga mencakup aspek keberlanjutan
-                        lingkungan. Dengan demikian, kami berharap dapat menjadi bagian dari upaya menjaga
-                        keberlanjutan
-                        lingkungan di Telkom University Surabaya.
-                    </p>
-                    <p>
-                        Misi kami adalah untuk memberikan solusi peminjaman yang terjangkau dan dapat diandalkan
-                        bagi
-                        semua penghuni Telkom University Surabaya. Kami percaya bahwa dengan berbagi dan meminjam,
-                        kita
-                        bisa mengurangi pemborosan dan mempermudah para penyelenggara acara untuk mendapatkan
-                        properti
-                        yang dibutuhkan.
-                    </p>
-                    <p>
-                        Selain itu, kami juga senantiasa melakukan perbaikan dan peningkatan dalam layanan kami
-                        untuk
-                        mendukung kemudahan akses bagi para pengguna. Kami selalu terbuka untuk menerima masukan dan
-                        saran dari pengguna agar dapat terus memperbaiki sistem peminjaman sehingga dapat lebih
-                        responsif terhadap berbagai kebutuhan. Dengan cara ini, kami berharap dapat terus menjadi
-                        mitra
-                        yang dapat diandalkan dan memberikan kontribusi positif dalam mendukung aktivitas dan acara
-                        di
-                        Telkom University Surabaya.
-                    </p>
-                    <p>
-                        Tim kami terdiri dari para profesional yang berdedikasi untuk memberikan layanan terbaik dan
-                        memastikan kepuasan Anda. Kami selalu siap membantu dan memberikan dukungan kapan pun Anda
-                        membutuhkannya.
-                    </p>
+                    <div class="card">
+                        <div class="card-body">
+                            <p>
+                                Kami menyediakan layanan peminjaman barang untuk memenuhi kebutuhan Anda.
+                                Dengan sistem yang mudah digunakan, kami memastikan bahwa Anda dapat meminjam berbagai
+                                barang dengan cepat dan efisien.
+                            </p>
+                            <p>
+                                Komitmen kami dalam menyediakan layanan peminjaman barang juga mencakup aspek
+                                keberlanjutan lingkungan. Dengan demikian, kami berharap dapat menjadi bagian dari upaya
+                                menjaga keberlanjutan lingkungan di Telkom University Surabaya.
+                            </p>
+                            <p>
+                                Misi kami adalah untuk memberikan solusi peminjaman yang terjangkau dan dapat diandalkan
+                                bagi semua penghuni Telkom University Surabaya. Kami percaya bahwa dengan berbagi dan
+                                meminjam, kita bisa mengurangi pemborosan dan mempermudah para penyelenggara acara untuk
+                                mendapatkan properti yang dibutuhkan.
+                            </p>
+                            <p>
+                                Selain itu, kami juga senantiasa melakukan perbaikan dan peningkatan dalam layanan kami
+                                untuk mendukung kemudahan akses bagi para pengguna. Kami selalu terbuka untuk menerima
+                                masukan dan saran dari pengguna agar dapat terus memperbaiki sistem peminjaman sehingga
+                                dapat lebih responsif terhadap berbagai kebutuhan. Dengan cara ini, kami berharap dapat
+                                terus menjadi mitra yang dapat diandalkan dan memberikan kontribusi positif dalam
+                                mendukung aktivitas dan acara di Telkom University Surabaya.
+                            </p>
+                            <p>
+                                Tim kami terdiri dari para profesional yang berdedikasi untuk memberikan layanan terbaik
+                                dan memastikan kepuasan Anda. Kami selalu siap membantu dan memberikan dukungan kapan
+                                pun Anda membutuhkannya.
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </div>
     </section>
@@ -88,10 +84,22 @@
                     </div>
                 </div>
             </div>
-            <div class="">
-                <a href="/pinjam" class="btn merah mt-4 mb-4">Pinjam Barang</a>
-            </div>
         </div>
     </section>
+    <section id="quotes">
+    <div class="container text-center ">
+        <div class="heading-home mt-4 mb-4">Quotes Inspiratif</div>
+        <div class="mb-4 pb-1 ">
+        <p>"In logistics, the difficulty is not in achieving perfection, but in consistently delivering excellence." - Katie Zobrist </p>
+            <p>"Efficiency in logistics is not just about moving goods, but about moving value." - John Seely Brown</p>
+            <p>"The key to successful campus logistics is synchronization - aligning the right resources at the right time." - Ben Van Heuvelen</p>
+            <p>"Logistics excellence on campus is a blend of precision, focus, and adaptability." - Adam Moore</p>
+            <p>"Strategic campus logistics management is the art of turning complexity into simplicity." - Chris Cooper</p>
+        </div>
+    </div>
+    <div class="pb-4">
+                <a href="/pinjam" class="btn merah mt-4 mb-4">Pinjam Barang</a>
+            </div>
+</section>
 </div>
 @endsection
