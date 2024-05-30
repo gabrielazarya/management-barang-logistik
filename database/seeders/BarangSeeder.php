@@ -17,20 +17,15 @@ class BarangSeeder extends Seeder
 
         $barangs = [
             [
-                'nama_barang' => 'Kursi Lipat',
                 'tipe_barang' => 'Kursi',
+                'jenis_barang' => 'Kursi Lipat',
                 'jumlah_barang_tersedia' => 50,
             ],
             [
-                'nama_barang' => 'Kursi Merah',
                 'tipe_barang' => 'Kursi',
+                'jenis_barang' => 'Kursi Merah',
                 'jumlah_barang_tersedia' => 30,
             ],
-            [
-                'nama_barang' => 'Kursi Hitam',
-                'tipe_barang' => 'Kursi',
-                'jumlah_barang_tersedia' => 40,
-            ]
         ];
 
         foreach ($barangs as $barang) {
