@@ -10,28 +10,40 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <div class="container mt-5">
-                        <h1 class="mb-4">Tambah Barang</h1>
-                        <form action="{{ route('tambahData') }}" method="POST">
-                            @csrf
-                            <div class="mb-3">
-                                <label for="nama_barang" class="form-label">Nama Barang</label>
-                                <select class="form-control" id="nama_barang" name="nama_barang" required>
-                                    <option value="">Pilih Barang</option>
+                        <h1 class="mb-4">Barang yang tersedia</h1>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Nama Barang</th>
+                                        <th>Tipe Barang</th>
+                                        <th>Jumlah Barang Tersedia</th>
+                                        <th>Aksi</th> <!-- New column for action buttons -->
+                                    </tr>
+                                </thead>
+                                <tbody>
                                     @foreach ($barangs as $barang)
-                                        <option value="{{ $barang->nama_barang }}">{{ $barang->nama_barang }}</option>
+                                        <tr>
+                                            <td>{{ $barang->nama_barang }}</td>
+                                            <td>{{ $barang->tipe_barang }}</td>
+                                            <td>{{ $barang->jumlah_barang_tersedia }}</td>
+                                            <td>
+                                                <!-- Action buttons -->
+                                                <a href="{{ route('editData', $barang->id_barang) }}"
+                                                    class="btn btn-sm btn-primary">Edit</a>
+                                                <form action="{{ route('deleteData', $barang->id_barang) }}"
+                                                    method="POST" style="display: inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-sm btn-danger"
+                                                        onclick="return confirm('Are you sure you want to delete this item?')">Delete</button>
+                                                </form>
+                                            </td>
+                                        </tr>
                                     @endforeach
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label for="tipe_barang" class="form-label">Tipe Barang</label>
-                                <input type="text" class="form-control" id="tipe_barang" name="tipe_barang" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="jumlah_barang_tersedia" class="form-label">Jumlah Barang Tersedia</label>
-                                <input type="number" class="form-control" id="jumlah_barang_tersedia" name="jumlah_barang_tersedia" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
                 </div>

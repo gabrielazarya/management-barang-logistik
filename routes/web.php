@@ -19,6 +19,11 @@ Route::post('/tambah', [AdminController::class, 'tambahData'])->name('tambahData
 Route::get('/konfirmasi', [AdminController::class, 'konfirmasi'])->name('konfirmasi')->middleware(RoleMiddleware::class . ':admin');
 Route::get('/riwayat', [AdminController::class, 'riwayat'])->name('adminRiwayat')->middleware(RoleMiddleware::class . ':admin');
 
+Route::get('/barang/{id}/edit', [AdminController::class, 'editData'])->name('editData')->middleware(RoleMiddleware::class . ':admin');
+Route::put('/barang/{id}', [AdminController::class, 'updateData'])->name('updateData')->middleware(RoleMiddleware::class . ':admin');
+Route::delete('/barang/{id}', [AdminController::class, 'deleteData'])->name('deleteData')->middleware(RoleMiddleware::class . ':admin');
+
+
 // user view
 Route::get('/ketersediaan', [UserController::class, 'ketersediaan'])->name('ketersediaan')->middleware(RoleMiddleware::class . ':user');
 Route::get('/pinjam', [UserController::class, 'pinjam'])->name('pinjam')->middleware(RoleMiddleware::class . ':user');
