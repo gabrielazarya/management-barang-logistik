@@ -9,14 +9,19 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <div class="container">
-                        <h1>Ketersediaan Barang</h1>
+                    <div class="container mt-5">
+                        <h1 class="mb-4">Ketersediaan Barang</h1>
                         <form method="GET" action="{{ route('ketersediaan') }}">
-                            <label for="date">Pilih Tanggal:</label>
-                            <input type="date" id="date" name="date" value="{{ $date }}">
-                            <button type="submit">Tampilkan</button>
+                            <label for="tanggal_pinjam">Tanggal Pinjam:</label>
+                            <input type="date" id="tanggal_pinjam" name="tanggal_pinjam" value="{{ $tanggal_pinjam }}">
+                        
+                            <label for="tanggal_pengembalian">Tanggal Pengembalian:</label>
+                            <input type="date" id="tanggal_pengembalian" name="tanggal_pengembalian" value="{{ $tanggal_pengembalian }}">
+                        
+                            <button type="submit">Cek Ketersediaan</button>
                         </form>
-                        <table>
+                        <div class="table-responsive">
+                        <table class="table table-striped">
                             <thead>
                                 <tr>
                                     <th>ID Barang</th>
