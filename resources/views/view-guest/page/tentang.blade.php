@@ -2,21 +2,43 @@
 
 @section('content')
 @include('view-guest.includes.landingpage')
-<div class="container">
-    <div class="section layout-home">
-        <section id="about-us" class="py-5">
-            <div class="row">
-                <div class="col-lg-6">
+<div class="section-layout-home">
+    <section id="about-us">
+        <div class="container">
+            <div class="heading-home mb-2 text-center">Tentang Logistik</div>
+            <div class="mt-4 row">
+                <div class="col-lg-12">
                     <p>
-                        Kami adalah platform yang menyediakan layanan peminjaman barang untuk memenuhi kebutuhan Anda.
-                        Dengan sistem yang mudah digunakan, kami memastikan bahwa Anda dapat meminjam berbagai barang
+                        Kami menyediakan layanan peminjaman barang untuk memenuhi kebutuhan Anda.
+                        Dengan sistem yang mudah digunakan, kami memastikan bahwa Anda dapat meminjam berbagai
+                        barang
                         dengan cepat dan efisien.
                     </p>
                     <p>
-                        Misi kami adalah untuk memberikan solusi peminjaman yang terjangkau dan dapat diandalkan bagi
-                        semua penghuni Telkom University Surabaya. Kami percaya bahwa dengan berbagi dan meminjam, kita
-                        bisa mengurangi pemborosan dan mempermudah para penyelenggara acara untuk mendapatkan properti
+                        Komitmen kami dalam menyediakan layanan peminjaman barang juga mencakup aspek keberlanjutan
+                        lingkungan. Dengan demikian, kami berharap dapat menjadi bagian dari upaya menjaga
+                        keberlanjutan
+                        lingkungan di Telkom University Surabaya.
+                    </p>
+                    <p>
+                        Misi kami adalah untuk memberikan solusi peminjaman yang terjangkau dan dapat diandalkan
+                        bagi
+                        semua penghuni Telkom University Surabaya. Kami percaya bahwa dengan berbagi dan meminjam,
+                        kita
+                        bisa mengurangi pemborosan dan mempermudah para penyelenggara acara untuk mendapatkan
+                        properti
                         yang dibutuhkan.
+                    </p>
+                    <p>
+                        Selain itu, kami juga senantiasa melakukan perbaikan dan peningkatan dalam layanan kami
+                        untuk
+                        mendukung kemudahan akses bagi para pengguna. Kami selalu terbuka untuk menerima masukan dan
+                        saran dari pengguna agar dapat terus memperbaiki sistem peminjaman sehingga dapat lebih
+                        responsif terhadap berbagai kebutuhan. Dengan cara ini, kami berharap dapat terus menjadi
+                        mitra
+                        yang dapat diandalkan dan memberikan kontribusi positif dalam mendukung aktivitas dan acara
+                        di
+                        Telkom University Surabaya.
                     </p>
                     <p>
                         Tim kami terdiri dari para profesional yang berdedikasi untuk memberikan layanan terbaik dan
@@ -25,62 +47,51 @@
                     </p>
                 </div>
             </div>
-
-            <h2>Our Team</h2>
-            <div class="team-section">
-                <div class="column">
-                    <div class="card">
-                        <img src="{{ asset('images/FotoMerahDanis.png') }}" alt="Denis kopling" width="60px">
-                        <div class="container">
-                            <h2>Jane Doe</h2>
-                            <p class="title">CEO & Founder</p>
-                            <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-                            <p>jane@example.com</p>
+    </section>
+    <section id="tim-kami">
+        <div class="bg-light">
+            <div class="container">
+                <div class="heading-home mb-2 mt-4 pt-4 text-center">Tim Kami</div>
+                <div class="team-section text-center">
+                    <div class="row">
+                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                            <img class="images-tentang-kami" src="{{asset('images/Geby.jpeg')}}">
+                            <div class="container">
+                                <h4>Gabriel Azarya</h4>
+                                <p class="title">1203220134</p>
+                            </div>
                         </div>
-                    </div>
-                </div>
 
-                <div class="column">
-                    <div class="card">
-                        <img src="/w3images/team2.jpg" alt="Mike">
-                        <div class="container">
-                            <h2>Mike Ross</h2>
-                            <p class="title">Art Director</p>
-                            <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-                            <p>mike@example.com</p>
+                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                            <img class="images-tentang-kami" src="{{asset('images/Mahendra.jpeg')}}">
+                            <div class="container">
+                                <h4>Mahendra Prathama</h4>
+                                <p class="title">1203222078</p>
+                            </div>
                         </div>
-                    </div>
-                </div>
 
-                <div class="column">
-                    <div class="card">
-                        <img src="/w3images/team3.jpg" alt="John">
-                        <div class="container">
-                            <h2>John Doe</h2>
-                            <p class="title">Designer</p>
-                            <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-                            <p>john@example.com</p>
+                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                            <img class="images-tentang-kami" src="{{asset('images/Rengga.jpeg')}}">
+                            <div class="container">
+                                <h4>I Gede Arengga</h4>
+                                <p class="title">1203220108</p>
+                            </div>
                         </div>
-                    </div>
-                </div>
 
-                <div class="column">
-                    <div class="card">
-                        <img src="/w3images/team3.jpg" alt="John">
-                        <div class="container">
-                            <h2>John Doe</h2>
-                            <p class="title">Designer</p>
-                            <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-                            <p>john@example.com</p>
+                        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                            <img class="images-tentang-kami" src="{{asset('images/Danis.jpeg')}}">
+                            <div class="container">
+                                <h4>Daniswara</h4>
+                                <p class="title">1203220066</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="text-center mt-4">
-                <a href="{{ url('/contact') }}" class="btn btn-primary">Hubungi Kami</a>
+            <div class="">
+                <a href="/pinjam" class="btn merah mt-4 mb-4">Pinjam Barang</a>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
 </div>
 @endsection

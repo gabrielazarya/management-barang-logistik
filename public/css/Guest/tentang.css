@@ -1,7 +1,11 @@
 /* tentang.css */
+.section-layout-home{
+    padding: 0;
+}
+
 #about-us {
-    padding: 60px 0;
-    background-color: #f8f9fa;
+    padding: 40px 0;
+    background-color: #ffffff;
     color: #333;
 }
 
@@ -49,18 +53,17 @@
 }
 
 /* Buttons */
-#about-us .btn {
+.btn {
     display: inline-block;
     padding: 10px 20px;
     font-weight: 500;
-    background-color: #9f1521;
-    color: #fff;
+    background-color: #fff;
+    color: #333;
     text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    border-radius: 10px;
 }
 
-#about-us .btn:hover {
+.btn:hover {
     background-color: #7d101b;
     color: #f8f8f8;
 }
@@ -86,22 +89,11 @@
     margin-bottom: 16px;
 }
 
-.team-section .card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    margin: 8px;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.team-section .card img {
-    width: 100%;
-    height: auto;
-    border-bottom: 2px solid #9f1521;
-}
-
 .team-section .container {
     padding: 16px;
     text-align: center;
+    justify-content: center;
+    align-items: center;
 }
 
 .team-section .title {
@@ -123,6 +115,12 @@
 .team-section .button:hover {
     background-color: #7d101b;
     color: #f8f8f8;
+}
+
+img {
+    border-radius: 50%;
+    max-width: 150px;
+    max-height: 150px;
 }
 
 @media (max-width: 992px) {
