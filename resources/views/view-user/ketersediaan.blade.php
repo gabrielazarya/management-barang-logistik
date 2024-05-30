@@ -18,7 +18,7 @@
                             <label for="tanggal_pengembalian">Tanggal Pengembalian:</label>
                             <input type="date" id="tanggal_pengembalian" name="tanggal_pengembalian" value="{{ $tanggal_pengembalian }}">
                         
-                            <button type="submit">Cek Ketersediaan</button>
+                            <button type="submit" class="btn btn-sm btn-primary">Cek Ketersediaan</button>
                         </form>
                         <div class="table-responsive">
                         <table class="table table-striped">

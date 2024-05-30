@@ -1,0 +1,194 @@
+import random
+import math
+import pandas as pd
+
+# Load the dataset from an Excel file
+def load_data(file_path):
+    df = pd.read_excel(file_path)
+    return df.values.tolist()
+
+# Preprocess the dataset
+def preprocess_data(data):
+    cleaned_dataset = []
+    incomplete_data = []
+    for index, row in enumerate(data):
+        try:
+            # Convert columns to float
+            row[4] = float(row[4])  # Convert Loss Rate to float
+            row[5] = float(str(row[5]).replace(',', ''))  # Convert Quantity Sold to float and remove commas
+            row[7] = float(str(row[7]).replace(',', ''))  # Convert Prize in 3 years to float and remove commas
+            
+            # Ensure label is valid
+            label = str(row[8]).strip().lower()
+            if label in ['laris', 'tidak laris']:
+                row[8] = label
+                cleaned_dataset.append(row)
+            else:
+                incomplete_data.append(row)
+        except ValueError:
+            incomplete_data.append(row)
+    return cleaned_dataset, incomplete_data
+
+# Convert labels to binary values for the classifier
+def encode_labels(dataset):
+    label_map = {'laris': 1, 'tidak laris': 0}
+    for data in dataset:
+        data[8] = label_map[data[8]]
+    return dataset
+
+# Split the dataset into training and testing sets
+def train_test_split(X, y, test_size=0.3, random_state=42):
+    combined = list(zip(X, y))
+    random.seed(random_state)
+    random.shuffle(combined)
+    split_idx = int(len(combined) * (1 - test_size))
+    X_train, y_train = zip(*combined[:split_idx])
+    X_test, y_test = zip(*combined[split_idx:])
+    return list(X_train), list(X_test), list(y_train), list(y_test)
+
+# Count occurrences of elements in a list
+def count_elements(elements):
+    counts = {}
+    for element in elements:
+        if element in counts:
+            counts[element] += 1
+        else:
+            counts[element] = 1
+    return counts
+
+# Calculate entropy
+def calculate_entropy(labels):
+    total = len(labels)
+    label_counts = count_elements(labels)
+    entropy = 0
+    for count in label_counts.values():
+        probability = count / total
+        entropy -= probability * (probability and math.log2(probability))
+    return entropy
+
+# Split the dataset based on a feature and a threshold
+def split_dataset(X, y, feature_index, threshold):
+    left_X, left_y, right_X, right_y = [], [], [], []
+    for features, label in zip(X, y):
+        if features[feature_index] < threshold:
+            left_X.append(features)
+            left_y.append(label)
+        else:
+            right_X.append(features)
+            right_y.append(label)
+    return left_X, left_y, right_X, right_y
+
+# Find the best feature and threshold to split the dataset
+def find_best_split(X, y):
+    best_gain = 0
+    best_feature_index = None
+    best_threshold = None
+    base_entropy = calculate_entropy(y)
+    for feature_index in range(len(X[0])):
+        thresholds = set(features[feature_index] for features in X)
+        for threshold in thresholds:
+            left_X, left_y, right_X, right_y = split_dataset(X, y, feature_index, threshold)
+            if len(left_y) == 0 or len(right_y) == 0:
+                continue
+            left_weight = len(left_y) / len(y)
+            right_weight = len(right_y) / len(y)
+            new_entropy = left_weight * calculate_entropy(left_y) + right_weight * calculate_entropy(right_y)
+            info_gain = base_entropy - new_entropy
+            if info_gain > best_gain:
+                best_gain = info_gain
+                best_feature_index = feature_index
+                best_threshold = threshold
+    return best_feature_index, best_threshold
+
+# Build a decision tree recursively
+def build_tree(X, y, depth=0, max_depth=None):
+    if len(set(y)) == 1:
+        return y[0]
+    if max_depth is not None and depth >= max_depth:
+        return max(set(y), key=y.count)
+    
+    feature_index, threshold = find_best_split(X, y)
+    if feature_index is None:
+        return max(set(y), key=y.count)
+    
+    left_X, left_y, right_X, right_y = split_dataset(X, y, feature_index, threshold)
+    left_branch = build_tree(left_X, left_y, depth + 1, max_depth)
+    right_branch = build_tree(right_X, right_y, depth + 1, max_depth)
+    return (feature_index, threshold, left_branch, right_branch)
+
+# Predict a label for a single instance
+def predict_tree(instance, tree):
+    if not isinstance(tree, tuple):
+        return tree
+    feature_index, threshold, left_branch, right_branch = tree
+    if instance[feature_index] < threshold:
+        return predict_tree(instance, left_branch)
+    else:
+        return predict_tree(instance, right_branch)
+
+# Evaluate the accuracy of the tree
+def evaluate_tree(X, y, tree):
+    predictions = [predict_tree(instance, tree) for instance in X]
+    correct = sum(1 for pred, true in zip(predictions, y) if pred == true)
+    accuracy = correct / len(y)
+    return accuracy, predictions
+
+# Calculate confusion matrix
+def calculate_confusion_matrix(y_true, y_pred):
+    tp = sum(1 for true, pred in zip(y_true, y_pred) if true == 1 and pred == 1)
+    tn = sum(1 for true, pred in zip(y_true, y_pred) if true == 0 and pred == 0)
+    fp = sum(1 for true, pred in zip(y_true, y_pred) if true == 0 and pred == 1)
+    fn = sum(1 for true, pred in zip(y_true, y_pred) if true == 1 and pred == 0)
+    return [[tn, fp], [fn, tp]]
+
+# Main process
+file_path = 'C:/Users/LENOVO/Documents/AI/data.xlsx'  # Replace with the actual file path
+dataset = load_data(file_path)
+
+dataset, incomplete_data = preprocess_data(dataset)
+print(f"Total rows after preprocessing: {len(dataset)}")
+print(f"Total rows with missing labels: {len(incomplete_data)}")
+
+dataset = encode_labels(dataset)
+cleaned_dataset = [[data[4], data[5], data[7], data[8]] for data in dataset if data[8] in [0, 1]]
+
+X = [data[:3] for data in cleaned_dataset]
+y = [data[3] for data in cleaned_dataset]
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+# Check the split
+print(f"Training set size: {len(X_train)}, Test set size: {len(X_test)}")
+
+tree = build_tree(X_train, y_train, max_depth=5)  # Limit depth to prevent overfitting
+print("Decision tree built successfully.")
+
+accuracy, predictions = evaluate_tree(X_test, y_test, tree)
+print(f"Accuracy: {accuracy}")
+
+# Calculate and print confusion matrix
+conf_matrix = calculate_confusion_matrix(y_test, predictions)
+print("Confusion Matrix:")
+print(conf_matrix)
+
+# Comparing with original labels to identify any discrepancies
+discrepancies = [(actual, predicted) for actual, predicted in zip(y_test, predictions) if actual != predicted]
+print(f"Discrepancies: {discrepancies}")
+
+# Predicting labels for incomplete data and saving to file
+for data in incomplete_data:
+    features = [data[4], data[5], data[7]]
+    predicted_label = predict_tree(features, tree)
+    data[8] = 'laris' if predicted_label == 1 else 'tidak laris'
+
+results = pd.DataFrame({
+    'Name': [data[1] for data in incomplete_data],
+    'Loss Rate': [data[4] for data in incomplete_data],
+    'Quantity Sold': [data[5] for data in incomplete_data],
+    'Prize in 3 years': [data[7] for data in incomplete_data],
+    'Laris/Tidak Laris': [data[8] for data in incomplete_data]
+})
+
+output_file_path = 'C:/Users/LENOVO/Documents/AI/manual_predicted_data.xlsx'
+results.to_excel(output_file_path, index=False)
+print(f"Results have been written to {output_file_path}")
