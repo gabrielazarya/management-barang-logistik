@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class BarangController extends Controller
 {
     public function ketersediaan(Request $request)
-{
+    {
     $tanggal_pinjam = $request->input('tanggal_pinjam', date('Y-m-d'));
     $tanggal_pengembalian = $request->input('tanggal_pengembalian', date('Y-m-d'));
 
@@ -32,7 +32,7 @@ class BarangController extends Controller
         ->get();
 
     return view('view-user.ketersediaan', ['items' => $availableItems, 'tanggal_pinjam' => $tanggal_pinjam, 'tanggal_pengembalian' => $tanggal_pengembalian]);
-}
+    }
 
     public function index()
     {
