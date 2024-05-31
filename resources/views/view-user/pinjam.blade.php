@@ -14,6 +14,11 @@
                             {{ session('success') }}
                         </div>
                     @endif
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
                     <form method="POST" action="{{ route('prosesPinjam') }}">
                         @csrf
                         <div class="mb-4">
@@ -25,8 +30,8 @@
                             </select>
                         </div>
                         <div class="mb-4">
-                            <label for="jumlah_pinjam" class="block text-gray-700">Jumlah Pinjam:</label>
-                            <input type="number" id="jumlah_pinjam" name="jumlah_pinjam" class="form-input mt-1 block w-full" required>
+                            <label for="jumlah_barang_dipinjam" class="block text-gray-700">Jumlah Pinjam:</label>
+                            <input type="number" id="jumlah_barang_dipinjam" name="jumlah_barang_dipinjam" class="form-input mt-1 block w-full" required>
                         </div>
                         <div class="mb-4">
                             <label for="tanggal_pinjam" class="block text-gray-700">Tanggal Pinjam:</label>

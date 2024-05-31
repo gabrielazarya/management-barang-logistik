@@ -37,30 +37,34 @@ class UserController extends Controller
 
     public function pinjam(Request $request)
     {
-        $barangs = Barang::all(); 
+        $barangs = Barang::all();
         return view('view-user.pinjam', ['barangs' => $barangs]);
     }
 
-    public function prosesPinjam(Request $request)
-{
-    $validated = $request->validate([
-        'id_barang' => 'required|exists:barang,id_barang',
-        'jumlah_pinjam' => 'required|integer|min:1',
-        'tanggal_pinjam' => 'required|date',
-        'tanggal_pengembalian' => 'required|date|after:tanggal_pinjam',
-    ]);
+public function prosesPinjam(Request $request)
+    {
+        $validated = $request->validate([
+            'id_barang' => 'required|exists:barangs,id_barang',
+            'jumlah_barang_dipinjam' => 'required|integer|min:1',
+            'tanggal_pinjam' => 'required|date',
+            'tanggal_pengembalian' => 'required|date|after:tanggal_pinjam',
+        ]);
 
-    $pinjam = new Pinjam();
-    $pinjam->user_id = auth()->user()->id; 
-    $pinjam->id_barang = $request->id_barang;
-    $pinjam->jumlah_pinjam = $request->jumlah_pinjam;
-    $pinjam->tanggal_pinjam = $request->tanggal_pinjam;
-    $pinjam->tanggal_pengembalian = $request->tanggal_pengembalian;
-    $pinjam->save();
+        $user_id = auth()->user()->id;
+        if (!$user_id) {
+            return redirect()->route('pinjam')->with('error', 'User not authenticated');
+        }
 
-    return redirect()->route('view-user.pinjam')->with('success', 'Peminjaman berhasil disimpan');
-}
+        Pinjam::create([
+            'user_id' => $user_id,
+            'id_barang' => $validated['id_barang'],
+            'jumlah_barang_dipinjam' => $validated['jumlah_barang_dipinjam'],
+            'tanggal_pinjam' => $validated['tanggal_pinjam'],
+            'tanggal_pengembalian' => $validated['tanggal_pengembalian'],
+        ]);
 
+        return redirect()->route('pinjam')->with('success', 'Peminjaman berhasil disimpan');
+    }
 
     public function riwayat()
     {
