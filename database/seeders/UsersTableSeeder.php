@@ -14,7 +14,7 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         // Clear the users table
-        User::truncate();
+        User::query()->delete();
 
         $users = [
             [

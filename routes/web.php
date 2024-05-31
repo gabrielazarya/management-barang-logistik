@@ -26,20 +26,16 @@ Route::get('/barang/{id}/edit', [AdminController::class, 'editData'])->name('edi
 Route::put('/barang/{id}', [AdminController::class, 'updateData'])->name('updateData')->middleware(RoleMiddleware::class . ':admin');
 Route::delete('/barang/{id}', [AdminController::class, 'deleteData'])->name('deleteData')->middleware(RoleMiddleware::class . ':admin');
 
-
 // user view
 Route::get('/ketersediaan', [UserController::class, 'ketersediaan'])->name('ketersediaan')->middleware(RoleMiddleware::class . ':user');
 Route::get('/pinjam', [UserController::class, 'pinjam'])->name('pinjam')->middleware(RoleMiddleware::class . ':user');
 Route::post('/pinjam', [UserController::class, 'prosesPinjam'])->name('prosesPinjam')->middleware(RoleMiddleware::class . ':user');
 Route::get('/riwayat-peminjaman', [UserController::class, 'riwayat'])->name('userRiwayat')->middleware(RoleMiddleware::class . ':user');
 
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/pinjam', [UserController::class, 'pinjam'])->name('pinjam');
-    Route::post('/pinjam', [UserController::class, 'prosesPinjam'])->name('prosesPinjam');
 });
 
 require __DIR__.'/auth.php';

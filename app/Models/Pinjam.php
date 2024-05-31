@@ -11,22 +11,21 @@ class Pinjam extends Model
 
     protected $primaryKey = 'id_pinjam';
     protected $fillable = [
+        'user_id', // Tambahkan user_id di sini
+        'id_barang',
         'jumlah_barang_dipinjam',
         'tanggal_pinjam',
         'tanggal_pengembalian',
-    ];
-
-    protected $hidden = [
         'status',
     ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
-
     public function barang()
     {
-        return $this->belongsTo(Barang::class, 'id_barang');
+        return $this->belongsTo(Barang::class, 'id_barang', 'id_barang');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'user_id');
     }
 }

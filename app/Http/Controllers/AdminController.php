@@ -17,30 +17,26 @@ class AdminController extends Controller
     
     public function konfirmasi()
     {
-
         $borrowedItems = Pinjam::where('status', 'pending')->with('barang', 'user')->get();
-
-        return view('view-admin.konfirmasi', ['borrowedItems' => $borrowedItems]);
+        return view('view-admin.konfirmasi', compact('borrowedItems'));
     }
 
     public function confirmBorrowing($id)
     {
         $pinjam = Pinjam::findOrFail($id);
-        $pinjam->status = 'confirmed'; 
-        $pinjam->save();
+        $pinjam->update(['status' => 'confirmed']);
 
-        return redirect()->route('konfirmasi')->with('success', 'Peminjaman berhasil dikonfirmasi');
+        return redirect()->route('konfirmasi')->with('success', 'Peminjaman dikonfirmasi!');
     }
 
     public function rejectBorrowing($id)
     {
         $pinjam = Pinjam::findOrFail($id);
-        $pinjam->status = 'rejected'; 
-        $pinjam->save();
+        $pinjam->update(['status' => 'rejected']);
 
-        return redirect()->route('konfirmasi')->with('error', 'Peminjaman ditolak');
+        return redirect()->route('konfirmasi')->with('error', 'Peminjaman ditolak!');
     }
-    
+
     public function riwayat()
     {
         return view('view-admin.riwayat');

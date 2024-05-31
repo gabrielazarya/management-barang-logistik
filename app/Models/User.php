@@ -45,4 +45,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function pinjams()
+    {
+        return $this->hasMany(Pinjam::class, 'user_id', 'id');
+    }
 }

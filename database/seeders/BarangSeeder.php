@@ -13,7 +13,7 @@ class BarangSeeder extends Seeder
      */
     public function run()
     {
-        Barang::truncate();
+        Barang::query()->delete();
 
         $barangs = [
             [

@@ -10,4 +10,9 @@ class Barang extends Model
     protected $table = 'barangs';
     protected $primaryKey = 'id_barang';
     protected $fillable = ['nama_barang', 'tipe_barang', 'jumlah_barang_tersedia'];
+
+    public function pinjams()
+    {
+        return $this->hasMany(Pinjam::class, 'user_id', 'user_id');
+    }
 }

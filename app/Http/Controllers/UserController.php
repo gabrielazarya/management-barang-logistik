@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Barang;
 use App\Models\Pinjam;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -38,33 +40,31 @@ class UserController extends Controller
     public function pinjam(Request $request)
     {
         $barangs = Barang::all();
-        return view('view-user.pinjam', ['barangs' => $barangs]);
+        $users = User::all();
+        return view('view-user.pinjam',compact('users'),compact('barangs'));
     }
 
-public function prosesPinjam(Request $request)
+    public function prosesPinjam(Request $request)
     {
-        $validated = $request->validate([
+        // Validasi request
+        $request->validate([
             'id_barang' => 'required|exists:barangs,id_barang',
             'jumlah_barang_dipinjam' => 'required|integer|min:1',
             'tanggal_pinjam' => 'required|date',
-            'tanggal_pengembalian' => 'required|date|after:tanggal_pinjam',
+            'tanggal_pengembalian' => 'required|date|after_or_equal:tanggal_pinjam',
         ]);
-
-        $user_id = auth()->user()->id;
-        if (!$user_id) {
-            return redirect()->route('pinjam')->with('error', 'User not authenticated');
-        }
-
+    
         Pinjam::create([
-            'user_id' => $user_id,
-            'id_barang' => $validated['id_barang'],
-            'jumlah_barang_dipinjam' => $validated['jumlah_barang_dipinjam'],
-            'tanggal_pinjam' => $validated['tanggal_pinjam'],
-            'tanggal_pengembalian' => $validated['tanggal_pengembalian'],
+            'user_id' => $request->user_id,
+            'id_barang' => $request->id_barang,
+            'jumlah_barang_dipinjam' => $request->jumlah_barang_dipinjam,
+            'tanggal_pinjam' => $request->tanggal_pinjam,
+            'tanggal_pengembalian' => $request->tanggal_pengembalian,
+            'status' => 'pending', 
         ]);
-
-        return redirect()->route('pinjam')->with('success', 'Peminjaman berhasil disimpan');
-    }
+    
+        return redirect()->route('pinjam')->with('success', 'Peminjaman berhasil diajukan!');
+    }    
 
     public function riwayat()
     {
