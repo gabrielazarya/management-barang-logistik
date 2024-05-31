@@ -25,7 +25,7 @@ Route::delete('/barang/{id}', [AdminController::class, 'deleteData'])->name('del
 
 
 // user view
-Route::get('/ketersediaan', [BarangController::class, 'ketersediaan'])->name('ketersediaan')->middleware(RoleMiddleware::class . ':user');
+Route::get('/ketersediaan', [UserController::class, 'ketersediaan'])->name('ketersediaan')->middleware(RoleMiddleware::class . ':user');
 Route::get('/pinjam', [UserController::class, 'pinjam'])->name('pinjam')->middleware(RoleMiddleware::class . ':user');
 Route::get('/riwayat-peminjaman', [UserController::class, 'riwayat'])->name('userRiwayat')->middleware(RoleMiddleware::class . ':user');
 
