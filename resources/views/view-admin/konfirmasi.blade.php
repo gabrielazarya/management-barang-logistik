@@ -9,7 +9,58 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
+                    <h3 class="text-lg font-medium leading-6 text-gray-900">{{ __('Daftar Peminjaman yang Perlu Dikonfirmasi') }}</h3>
+                    @if(session('success'))
+                        <div class="mt-4 p-4 bg-green-100 text-green-800 rounded">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    @if(session('error'))
+                        <div class="mt-4 p-4 bg-red-100 text-red-800 rounded">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+                    <div class="mt-6">
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">#</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Barang</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jumlah</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal Pinjam</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal Pengembalian</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">User</th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    @foreach($borrowedItems as $item)
+                                        <tr>
+                                            <td class="px-6 py-4 whitespace-nowrap">{{ $loop->iteration }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">{{ $item->barang->nama_barang }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">{{ $item->jumlah_pinjam }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">{{ $item->tanggal_pinjam }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">{{ $item->tanggal_pengembalian }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">{{ $item->user->name }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <form action="{{ route('confirmBorrowing', $item->id) }}" method="POST" class="inline-block">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Konfirmasi</button>
+                                                </form>
+                                                <form action="{{ route('rejectBorrowing', $item->id) }}" method="POST" class="inline-block">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Tolak</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

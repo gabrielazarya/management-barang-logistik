@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Barang;
+use App\Models\Pinjam;
 
 class AdminController extends Controller
 {
@@ -15,7 +16,28 @@ class AdminController extends Controller
     
     public function konfirmasi()
     {
-        return view('view-admin.konfirmasi');
+
+        $borrowedItems = Pinjam::where('status', 'pending')->with('barang', 'user')->get();
+
+        return view('view-admin.konfirmasi', ['borrowedItems' => $borrowedItems]);
+    }
+
+    public function confirmBorrowing($id)
+    {
+        $pinjam = Pinjam::findOrFail($id);
+        $pinjam->status = 'confirmed'; 
+        $pinjam->save();
+
+        return redirect()->route('konfirmasi')->with('success', 'Peminjaman berhasil dikonfirmasi');
+    }
+
+    public function rejectBorrowing($id)
+    {
+        $pinjam = Pinjam::findOrFail($id);
+        $pinjam->status = 'rejected'; 
+        $pinjam->save();
+
+        return redirect()->route('konfirmasi')->with('error', 'Peminjaman ditolak');
     }
     
     public function riwayat()
