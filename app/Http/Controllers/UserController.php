@@ -51,7 +51,7 @@ class UserController extends Controller
     ]);
 
     $pinjam = new Pinjam();
-    $pinjam->user_id = auth()->user()->id; // Assuming the user is authenticated
+    $pinjam->user_id = auth()->user()->id; 
     $pinjam->id_barang = $request->id_barang;
     $pinjam->jumlah_pinjam = $request->jumlah_pinjam;
     $pinjam->tanggal_pinjam = $request->tanggal_pinjam;
