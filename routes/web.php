@@ -19,6 +19,9 @@ Route::post('/tambah', [AdminController::class, 'tambahData'])->name('tambahData
 Route::get('/konfirmasi', [AdminController::class, 'konfirmasi'])->name('konfirmasi')->middleware(RoleMiddleware::class . ':admin');
 Route::get('/riwayat', [AdminController::class, 'riwayat'])->name('adminRiwayat')->middleware(RoleMiddleware::class . ':admin');
 
+Route::patch('/konfirmasi/{id}/confirm', [AdminController::class, 'confirmBorrowing'])->name('confirmBorrowing')->middleware(RoleMiddleware::class . ':admin');
+Route::patch('/konfirmasi/{id}/reject', [AdminController::class, 'rejectBorrowing'])->name('rejectBorrowing')->middleware(RoleMiddleware::class . ':admin');
+
 Route::get('/barang/{id}/edit', [AdminController::class, 'editData'])->name('editData')->middleware(RoleMiddleware::class . ':admin');
 Route::put('/barang/{id}', [AdminController::class, 'updateData'])->name('updateData')->middleware(RoleMiddleware::class . ':admin');
 Route::delete('/barang/{id}', [AdminController::class, 'deleteData'])->name('deleteData')->middleware(RoleMiddleware::class . ':admin');
