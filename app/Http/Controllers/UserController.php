@@ -34,10 +34,34 @@ class UserController extends Controller
 
         return view('view-user.ketersediaan', ['items' => $availableItems, 'tanggal_pinjam' => $tanggal_pinjam, 'tanggal_pengembalian' => $tanggal_pengembalian]);
     }
-    public function pinjam()
+
+    public function pinjam(Request $request)
     {
-        return view('view-user.pinjam');
+        $barangs = Barang::all(); 
+        return view('view-user.pinjam', ['barangs' => $barangs]);
     }
+
+    public function prosesPinjam(Request $request)
+{
+    $validated = $request->validate([
+        'id_barang' => 'required|exists:barang,id_barang',
+        'jumlah_pinjam' => 'required|integer|min:1',
+        'tanggal_pinjam' => 'required|date',
+        'tanggal_pengembalian' => 'required|date|after:tanggal_pinjam',
+    ]);
+
+    $pinjam = new Pinjam();
+    $pinjam->user_id = auth()->user()->id; // Assuming the user is authenticated
+    $pinjam->id_barang = $request->id_barang;
+    $pinjam->jumlah_pinjam = $request->jumlah_pinjam;
+    $pinjam->tanggal_pinjam = $request->tanggal_pinjam;
+    $pinjam->tanggal_pengembalian = $request->tanggal_pengembalian;
+    $pinjam->save();
+
+    return redirect()->route('view-user.pinjam')->with('success', 'Peminjaman berhasil disimpan');
+}
+
+
     public function riwayat()
     {
         return view('view-user.riwayat');
