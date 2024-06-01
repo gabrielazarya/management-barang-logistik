@@ -24,7 +24,7 @@ class AdminController extends Controller
     public function confirmBorrowing($id)
     {
         $pinjam = Pinjam::findOrFail($id);
-        $pinjam->update(['status' => 'confirmed']);
+        $pinjam->update(['status' => 'terima']);
 
         return redirect()->route('konfirmasi')->with('success', 'Peminjaman dikonfirmasi!');
     }
@@ -32,7 +32,7 @@ class AdminController extends Controller
     public function rejectBorrowing($id)
     {
         $pinjam = Pinjam::findOrFail($id);
-        $pinjam->update(['status' => 'rejected']);
+        $pinjam->update(['status' => 'tolak']);
 
         return redirect()->route('konfirmasi')->with('error', 'Peminjaman ditolak!');
     }
