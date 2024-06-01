@@ -9,12 +9,22 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
+
+                    @if (session('success'))
+                        <div id="notification" class="bg-green-500 text-white p-4 mb-4 rounded">
+                            {{ session('success') }}
+                        </div>
+                    @elseif (session('error'))
+                        <div id="notification" class="bg-red-500 text-white p-4 mb-4 rounded">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+
                     <form action="{{ route('prosesPinjam') }}" method="POST">
                         @csrf
                         <input type="hidden" name="user_id" value="{{ auth()->id() }}">
                         <div class="mb-4">
-                            <label for="nama_peminjam" class="block text-sm font-medium text-gray-700">Nama
-                                Peminjam</label>
+                            <label for="nama_peminjam" class="block text-sm font-medium text-gray-700">Nama Peminjam</label>
                             <input type="text" name="nama_peminjam" id="nama_peminjam" class="mt-1 block w-full"
                                 value="{{ auth()->user()->name }}" disabled>
                         </div>
@@ -27,28 +37,37 @@
                             </select>
                         </div>
                         <div class="mb-4">
-                            <label for="jumlah_barang_dipinjam"
-                                class="block text-sm font-medium text-gray-700">Jumlah</label>
+                            <label for="jumlah_barang_dipinjam" class="block text-sm font-medium text-gray-700">Jumlah</label>
                             <input type="number" name="jumlah_barang_dipinjam" id="jumlah_barang_dipinjam"
                                 min="1" required class="mt-1 block w-full">
                         </div>
                         <div class="mb-4">
-                            <label for="tanggal_pinjam" class="block text-sm font-medium text-gray-700">Tanggal
-                                Pinjam</label>
+                            <label for="tanggal_pinjam" class="block text-sm font-medium text-gray-700">Tanggal Pinjam</label>
                             <input type="date" name="tanggal_pinjam" id="tanggal_pinjam" required
                                 class="mt-1 block w-full">
                         </div>
                         <div class="mb-4">
-                            <label for="tanggal_pengembalian" class="block text-sm font-medium text-gray-700">Tanggal
-                                Pengembalian</label>
+                            <label for="tanggal_pengembalian" class="block text-sm font-medium text-gray-700">Tanggal Pengembalian</label>
                             <input type="date" name="tanggal_pengembalian" id="tanggal_pengembalian" required
                                 class="mt-1 block w-full">
                         </div>
-                        <button type="submit"
-                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Pinjam</button>
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            Pinjam
+                        </button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </x-app-layout>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var notification = document.getElementById('notification');
+        if (notification) {
+            setTimeout(function() {
+                notification.style.display = 'none';
+            }, 3000); // Hide after 3 seconds
+        }
+    });
+</script>
