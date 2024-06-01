@@ -27,35 +27,73 @@
                             <table class="min-w-full divide-y divide-gray-200">
                                 <thead class="bg-gray-50">
                                     <tr>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">#</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Barang</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jumlah</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal Pinjam</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal Pengembalian</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">User</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            No</th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            ID Pinjam</th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            User ID</th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Nama Peminjam</th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            ID Barang</th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Nama Barang</th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Jumlah Barang</th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Tanggal Pinjam</th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Tanggal Pengembalian</th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Status</th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
                                     @foreach ($borrowedItems as $item)
                                         <tr>
                                             <td class="px-6 py-4 whitespace-nowrap">{{ $loop->iteration }}</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">{{ $item->user_id }}</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">{{ $item->id_barang->nama_barang }}</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">{{ $item->jumlah_pinjam }}</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">{{ $item->tanggal_pinjam }}</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">{{ $item->tanggal_pengembalian }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">{{ $item->id_pinjam }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">{{ $item->user->user_id }}</td>
                                             <td class="px-6 py-4 whitespace-nowrap">{{ $item->user->name }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">{{ $item->id_barang }}
+                                            <td class="px-6 py-4 whitespace-nowrap">{{ $item->barang->nama_barang }}
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">{{ $item->jumlah_barang_dipinjam }}
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">{{ $item->tanggal_pinjam }}</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">{{ $item->tanggal_pengembalian }}
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">{{ $item->status }}</td>
                                             <td class="px-6 py-4 whitespace-nowrap">
-                                                <form action="{{ route('confirmBorrowing', ['user_id' => $item->user_id]) }}" method="POST" class="inline-block">
+                                                <form
+                                                    action="{{ route('confirmBorrowing', ['user_id' => $item->user->user_id]) }}"
+                                                    method="POST" class="inline-block">
                                                     @csrf
                                                     @method('PATCH')
-                                                    <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Konfirmasi</button>
+                                                    <button type="submit"
+                                                        class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Konfirmasi</button>
                                                 </form>
-                                                <form action="{{ route('rejectBorrowing', ['user_id' => $item->user_id]) }}" method="POST" class="inline-block">
+                                                <form
+                                                    action="{{ route('rejectBorrowing', ['user_id' => $item->user->user_id]) }}"
+                                                    method="POST" class="inline-block">
                                                     @csrf
                                                     @method('PATCH')
-                                                    <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Tolak</button>
+                                                    <button type="submit"
+                                                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Tolak</button>
                                                 </form>
                                             </td>
                                         </tr>
