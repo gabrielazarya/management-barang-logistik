@@ -21,6 +21,7 @@
                             <table class="table table-striped" id="barangTable">
                                 <thead>
                                     <tr>
+                                        <th>No</th>
                                         <th>Nama Barang</th>
                                         <th id="tipeHeader" style="cursor: pointer;">Tipe Barang &#x2193;</th> <!-- Clickable header for sorting -->
                                         <th id="jumlahHeader" style="cursor: pointer;">Jumlah Barang Tersedia &#x2193;</th> <!-- Clickable header for sorting -->
@@ -30,6 +31,7 @@
                                 <tbody>
                                     @foreach ($barangs as $barang)
                                         <tr>
+                                            <td class="nomor-urut"></td>
                                             <td>{{ $barang->nama_barang }}</td>
                                             <td>{{ $barang->tipe_barang }}</td>
                                             <td>{{ $barang->jumlah_barang_tersedia }}</td>
@@ -63,7 +65,7 @@
             tr = table.getElementsByTagName('tr');
 
             for (i = 1; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName('td')[0]; // Use the first column (Nama Barang)
+                td = tr[i].getElementsByTagName('td')[1]; // Use the second column (Nama Barang)
                 if (td) {
                     txtValue = td.textContent || td.innerText;
                     if (txtValue.toLowerCase().indexOf(filter) > -1) {
@@ -73,6 +75,7 @@
                     }
                 }       
             }
+            updateNomorUrut(); // Update the numbering after filtering
         });
 
         function sortTable(n, isNumeric = false) {
@@ -129,6 +132,8 @@
                 }
             }
 
+            updateNomorUrut(); // Update the numbering after sorting
+
             var header = document.getElementsByTagName('th')[n];
             if (dir == "asc") {
                 header.innerHTML = header.innerHTML.replace('&#x2193;', '&#x2191;').replace('&#x2191;', '&#x2193;');
@@ -138,11 +143,27 @@
         }
 
         document.getElementById('jumlahHeader').addEventListener('click', function() {
-            sortTable(2, true); // Sorting based on the third column (Jumlah Barang Tersedia), numeric sorting
+            sortTable(3, true); // Sorting based on the fourth column (Jumlah Barang Tersedia), numeric sorting
         });
 
         document.getElementById('tipeHeader').addEventListener('click', function() {
-            sortTable(1, false); // Sorting based on the second column (Tipe Barang), string sorting
+            sortTable(2, false); // Sorting based on the third column (Tipe Barang), string sorting
         });
+
+        function updateNomorUrut() {
+            var table, rows, i, counter = 1;
+            table = document.getElementById('barangTable');
+            rows = table.getElementsByTagName('tr');
+            for (i = 1; i < rows.length; i++) {
+                if (rows[i].style.display !== 'none') {
+                    rows[i].getElementsByTagName('td')[0].innerHTML = counter;
+                    counter++;
+                }
+            }
+        }
+
+        window.onload = function() {
+            updateNomorUrut(); // Update numbering when the page loads
+        };
     </script>
 </x-app-layout>
