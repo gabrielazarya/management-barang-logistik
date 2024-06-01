@@ -13,6 +13,6 @@ class Barang extends Model
 
     public function pinjams()
     {
-        return $this->hasMany(Pinjam::class, 'user_id', 'user_id');
+        return $this->hasMany(Pinjam::class, 'id_barang', 'id_barang');
     }
 }
