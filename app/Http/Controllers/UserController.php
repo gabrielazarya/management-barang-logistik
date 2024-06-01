@@ -68,8 +68,10 @@ class UserController extends Controller
 
     public function riwayat()
     {
-        return view('view-user.riwayat');
+         // Ambil data peminjaman berdasarkan user yang login
+         $userId = Auth::id();
+         $pinjams = Pinjam::where('user_id', $userId)->with('barang')->get();
+ 
+         return view('view-user.riwayat', compact('pinjams'));
     }
-
-    
 }

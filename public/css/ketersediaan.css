@@ -1,4 +1,3 @@
-
 .ketersediaan-container {
     font-family: Arial, sans-serif;
     background-color: #f9f9f9;
@@ -16,9 +15,16 @@
 
 .ketersediaan-form {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
     margin-bottom: 20px;
+}
+
+.ketersediaan-form .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
 }
 
 .ketersediaan-form label {
@@ -26,25 +32,29 @@
     font-weight: bold;
 }
 
-.ketersediaan-form input[type="date"],
-.ketersediaan-form button {
+.ketersediaan-form input[type="date"] {
     padding: 10px;
-    margin: 5px 0;
     border: 1px solid #ccc;
     border-radius: 4px;
     width: 100%;
-    max-width: 300px;
 }
 
 .ketersediaan-form button {
+    padding: 10px 20px;
+    margin-top: 24px;
+    border: 1px solid #007bff;
+    border-radius: 4px;
     background-color: #007bff;
     color: white;
-    border: none;
     cursor: pointer;
 }
 
 .ketersediaan-form button:hover {
     background-color: #0056b3;
+}
+
+.mb-4 {
+    width: 100%;
 }
 
 .ketersediaan-table {
@@ -71,16 +81,9 @@
 @media (min-width: 768px) {
     .ketersediaan-form {
         flex-direction: row;
-        justify-content: center;
     }
 
-    .ketersediaan-form label,
-    .ketersediaan-form input[type="date"],
-    .ketersediaan-form button {
+    .ketersediaan-form .form-group {
         margin: 0 10px;
-    }
-
-    .ketersediaan-form input[type="date"] {
-        max-width: none;
     }
 }
