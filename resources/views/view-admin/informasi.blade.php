@@ -11,14 +11,20 @@
                 <div class="p-6 text-gray-900">
                     <div class="container mt-5">
                         <h1 class="mb-4">Barang yang tersedia</h1>
+                        
+                        <!-- Search input -->
+                        <div class="mb-4">
+                            <input type="text" id="searchInput" class="form-control" placeholder="Cari nama barang...">
+                        </div>
+
                         <div class="table-responsive">
-                            <table class="table table-striped">
+                            <table class="table table-striped" id="barangTable">
                                 <thead>
                                     <tr>
                                         <th>Nama Barang</th>
-                                        <th>Tipe Barang</th>
-                                        <th>Jumlah Barang Tersedia</th>
-                                        <th>Aksi</th> <!-- New column for action buttons -->
+                                        <th id="tipeHeader" style="cursor: pointer;">Tipe Barang &#x2193;</th> <!-- Clickable header for sorting -->
+                                        <th id="jumlahHeader" style="cursor: pointer;">Jumlah Barang Tersedia &#x2193;</th> <!-- Clickable header for sorting -->
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -28,15 +34,11 @@
                                             <td>{{ $barang->tipe_barang }}</td>
                                             <td>{{ $barang->jumlah_barang_tersedia }}</td>
                                             <td>
-                                                <!-- Action buttons -->
-                                                <a href="{{ route('editData', $barang->id_barang) }}"
-                                                    class="btn btn-sm btn-primary">Edit</a>
-                                                <form action="{{ route('deleteData', $barang->id_barang) }}"
-                                                    method="POST" style="display: inline;">
+                                                <a href="{{ route('editData', $barang->id_barang) }}" class="btn btn-sm btn-primary">Edit</a>
+                                                <form action="{{ route('deleteData', $barang->id_barang) }}" method="POST" style="display: inline;">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger"
-                                                        onclick="return confirm('Are you sure you want to delete this item?')">Delete</button>
+                                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this item?')">Delete</button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -50,4 +52,97 @@
             </div>
         </div>
     </div>
+
+    <!-- Add JavaScript for Search and Sorting Functionality -->
+    <script>
+        document.getElementById('searchInput').addEventListener('keyup', function() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById('searchInput');
+            filter = input.value.toLowerCase();
+            table = document.getElementById('barangTable');
+            tr = table.getElementsByTagName('tr');
+
+            for (i = 1; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName('td')[0]; // Use the first column (Nama Barang)
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                        tr[i].style.display = '';
+                    } else {
+                        tr[i].style.display = 'none';
+                    }
+                }       
+            }
+        });
+
+        function sortTable(n, isNumeric = false) {
+            var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+            table = document.getElementById('barangTable');
+            switching = true;
+            dir = "asc"; // Set the sorting direction to ascending initially
+
+            while (switching) {
+                switching = false;
+                rows = table.rows;
+
+                for (i = 1; i < (rows.length - 1); i++) {
+                    shouldSwitch = false;
+                    x = rows[i].getElementsByTagName('td')[n];
+                    y = rows[i + 1].getElementsByTagName('td')[n];
+
+                    if (isNumeric) {
+                        if (dir == "asc") {
+                            if (parseInt(x.innerHTML) > parseInt(y.innerHTML)) {
+                                shouldSwitch = true;
+                                break;
+                            }
+                        } else if (dir == "desc") {
+                            if (parseInt(x.innerHTML) < parseInt(y.innerHTML)) {
+                                shouldSwitch = true;
+                                break;
+                            }
+                        }
+                    } else {
+                        if (dir == "asc") {
+                            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                                shouldSwitch = true;
+                                break;
+                            }
+                        } else if (dir == "desc") {
+                            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                                shouldSwitch = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    switchcount++;
+                } else {
+                    if (switchcount == 0 && dir == "asc") {
+                        dir = "desc";
+                        switching = true;
+                    }
+                }
+            }
+
+            var header = document.getElementsByTagName('th')[n];
+            if (dir == "asc") {
+                header.innerHTML = header.innerHTML.replace('&#x2193;', '&#x2191;').replace('&#x2191;', '&#x2193;');
+            } else {
+                header.innerHTML = header.innerHTML.replace('&#x2193;', '&#x2191;').replace('&#x2191;', '&#x2193;');
+            }
+        }
+
+        document.getElementById('jumlahHeader').addEventListener('click', function() {
+            sortTable(2, true); // Sorting based on the third column (Jumlah Barang Tersedia), numeric sorting
+        });
+
+        document.getElementById('tipeHeader').addEventListener('click', function() {
+            sortTable(1, false); // Sorting based on the second column (Tipe Barang), string sorting
+        });
+    </script>
 </x-app-layout>
