@@ -13,9 +13,9 @@
                         @csrf
                         <input type="hidden" name="user_id" value="{{ auth()->id() }}">
                         <div class="mb-4">
-                            <label for="nama_peminjam" class="block text-sm font-medium text-gray-700">Nama
+                            <label for="name" class="block text-sm font-medium text-gray-700">Nama
                                 Peminjam</label>
-                            <input type="text" name="nama_peminjam" id="nama_peminjam" class="mt-1 block w-full"
+                            <input type="text" name="name" id="name" class="mt-1 block w-full"
                                 value="{{ auth()->user()->name }}" disabled>
                         </div>
                         <div class="mb-4">

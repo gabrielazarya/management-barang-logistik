@@ -13,9 +13,11 @@
                     <table class="table">
                         <thead>
                             <tr>
+                                <th>No</th>
                                 <th>ID Peminjaman</th>
                                 <th>Nama Pengguna</th>
-                                <th>Barang</th>
+                                <th>ID Barang</th>
+                                <th>Nama Barang</th>
                                 <th>Jumlah</th>
                                 <th>Tanggal Pinjam</th>
                                 <th>Tanggal Pengembalian</th>
@@ -24,15 +26,17 @@
                         </thead>
                         <tbody>
                             @foreach ($pinjams as $pinjam)
-                            <tr>
-                                <td>{{ $pinjam->id_pinjam }}</td>
-                                <td>{{ $pinjam->user->name }}</td>
-                                <td>{{ $pinjam->barang->nama_barang }}</td>
-                                <td>{{ $pinjam->jumlah_barang_dipinjam }}</td>
-                                <td>{{ $pinjam->tanggal_pinjam }}</td>
-                                <td>{{ $pinjam->tanggal_pengembalian }}</td>
-                                <td>{{ $pinjam->status }}</td>
-                            </tr>
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $pinjam->id_pinjam }}</td>
+                                    <td>{{ $pinjam->user->name }}</td>
+                                    <td>{{ $pinjam->barang->id_barang }}</td>
+                                    <td>{{ $pinjam->barang->nama_barang }}</td>
+                                    <td>{{ $pinjam->jumlah_barang_dipinjam }}</td>
+                                    <td>{{ $pinjam->tanggal_pinjam }}</td>
+                                    <td>{{ $pinjam->tanggal_pengembalian }}</td>
+                                    <td>{{ $pinjam->status }}</td>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>

@@ -11,7 +11,7 @@ class Pinjam extends Model
 
     protected $primaryKey = 'id_pinjam';
     protected $fillable = [
-        'user_id', // Tambahkan user_id di sini
+        'user_id', 
         'id_barang',
         'jumlah_barang_dipinjam',
         'tanggal_pinjam',
