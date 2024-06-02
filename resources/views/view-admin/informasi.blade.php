@@ -9,12 +9,14 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <div class="container mt-5">
-                        <h1 class="mb-4">Barang yang tersedia</h1>
-                        
-                        <!-- Search input -->
+                    <h3 class="text-lg font-medium leading-6 text-gray-900">
+                        {{ __('Keseluruhan Data Barang Logistik') }}
+                    </h3>
+                    <div class="container mt-4">
+
                         <div class="mb-4">
-                            <input type="text" id="searchInput" class="form-control" placeholder="Cari nama barang...">
+                            <input type="text" id="searchInput" class="form-control"
+                                placeholder="Cari nama barang...">
                         </div>
 
                         <div class="table-responsive">
@@ -23,8 +25,10 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Nama Barang</th>
-                                        <th id="tipeHeader" style="cursor: pointer;">Tipe Barang &#x2193;</th> <!-- Clickable header for sorting -->
-                                        <th id="jumlahHeader" style="cursor: pointer;">Jumlah Barang Tersedia &#x2193;</th> <!-- Clickable header for sorting -->
+                                        <th id="tipeHeader" style="cursor: pointer;">Tipe Barang &#x2193;</th>
+                                        <!-- Clickable header for sorting -->
+                                        <th id="jumlahHeader" style="cursor: pointer;">Jumlah Barang Tersedia &#x2193;
+                                        </th> <!-- Clickable header for sorting -->
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -36,11 +40,14 @@
                                             <td>{{ $barang->tipe_barang }}</td>
                                             <td>{{ $barang->jumlah_barang_tersedia }}</td>
                                             <td>
-                                                <a href="{{ route('editData', $barang->id_barang) }}" class="btn btn-sm btn-primary">Edit</a>
-                                                <form action="{{ route('deleteData', $barang->id_barang) }}" method="POST" style="display: inline;">
+                                                <a href="{{ route('editData', $barang->id_barang) }}"
+                                                    class="btn btn-sm btn-primary">Edit</a>
+                                                <form action="{{ route('deleteData', $barang->id_barang) }}"
+                                                    method="POST" style="display: inline;">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this item?')">Delete</button>
+                                                    <button type="submit" class="btn btn-sm btn-danger"
+                                                        onclick="return confirm('Are you sure you want to delete this item?')">Delete</button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -73,7 +80,7 @@
                     } else {
                         tr[i].style.display = 'none';
                     }
-                }       
+                }
             }
             updateNomorUrut(); // Update the numbering after filtering
         });

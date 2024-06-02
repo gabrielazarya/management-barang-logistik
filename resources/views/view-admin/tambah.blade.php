@@ -9,8 +9,10 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <div class="container mt-5">
-                        <h1 class="mb-4">Tambah Barang</h1>
+                    <h3 class="text-lg font-medium leading-6 text-gray-900">
+                        {{ __('Tambah Barang Logistik') }}
+                    </h3>
+                    <div class="container mt-4">
                         <form action="{{ route('tambahData') }}" method="POST">
                             @csrf
                             <div class="mb-3">

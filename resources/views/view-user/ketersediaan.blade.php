@@ -10,47 +10,53 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <div class="ketersediaan-container mt-5">
-                        <h1 class="ketersediaan-header mb-4">Ketersediaan Barang</h1>
+                        <h1 class="ketersediaan-header mb-4">{{ __('Ketersediaan Barang') }}</h1>
                         <form class="ketersediaan-form" method="GET" action="{{ route('ketersediaan') }}">
                             <div class="form-group">
                                 <label for="tanggal_pinjam">Tanggal Pinjam:</label>
-                                <input type="date" id="tanggal_pinjam" name="tanggal_pinjam" value="{{ $tanggal_pinjam }}" class="form-control">
+                                <input type="date" id="tanggal_pinjam" name="tanggal_pinjam"
+                                    value="{{ $tanggal_pinjam }}" class="form-control">
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="tanggal_pengembalian">Tanggal Pengembalian:</label>
-                                <input type="date" id="tanggal_pengembalian" name="tanggal_pengembalian" value="{{ $tanggal_pengembalian }}" class="form-control">
+                                <input type="date" id="tanggal_pengembalian" name="tanggal_pengembalian"
+                                    value="{{ $tanggal_pengembalian }}" class="form-control">
                             </div>
-                            
-                            <button type="submit" class="btn btn-sm btn-primary align-self-end">Cek Ketersediaan</button>
+
+                            <button type="submit" class="btn btn-sm btn-primary align-self-end">Cek
+                                Ketersediaan</button>
                         </form>
-                        
+
                         <div class="mb-4 mt-3">
-                            <input type="text" id="searchInput" class="form-control" placeholder="Cari nama barang...">
+                            <input type="text" id="searchInput" class="form-control"
+                                placeholder="Cari nama barang...">
                         </div>
-                        
-                        <div class="table-responsive">
-                            <table id="barangTable" class="ketersediaan-table table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>ID Barang</th>
-                                        <th>Nama Barang</th>
-                                        <th>Tipe Barang</th>
-                                        <th>Jumlah Tersedia</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($items as $item)
+                        <div class="container">
+                            <div class="table-responsive">
+                                <table id="barangTable" class="ketersediaan-table table table-striped">
+                                    <thead>
                                         <tr>
-                                            <td>{{ $item->id_barang }}</td>
-                                            <td>{{ $item->nama_barang }}</td>
-                                            <td>{{ $item->tipe_barang }}</td>
-                                            <td>{{ $item->jumlah_tersedia }}</td>
+                                            <th>ID Barang</th>
+                                            <th>Nama Barang</th>
+                                            <th>Tipe Barang</th>
+                                            <th>Jumlah Tersedia</th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($items as $item)
+                                            <tr>
+                                                <td>{{ $item->id_barang }}</td>
+                                                <td>{{ $item->nama_barang }}</td>
+                                                <td>{{ $item->tipe_barang }}</td>
+                                                <td>{{ $item->jumlah_tersedia }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>

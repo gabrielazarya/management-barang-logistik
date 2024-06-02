@@ -63,12 +63,6 @@ class UserController extends Controller
             'status' => 'pending', 
         ]);
         // Validate the request
-    $request->validate([
-        'id_barang' => 'required|exists:barangs,id_barang',
-        'jumlah_barang_dipinjam' => 'required|integer|min:1',
-        'tanggal_pinjam' => 'required|date',
-        'tanggal_pengembalian' => 'required|date|after_or_equal:tanggal_pinjam',
-    ]);
 
     // Retrieve the selected barang
     $barang = Barang::find($request->id_barang);
@@ -79,19 +73,10 @@ class UserController extends Controller
     }
 
     try {
-        // Logic for processing the form submission
-        // For example, create a new Peminjaman record
-
-        // Update the stock
-        $barang->jumlah_barang_tersedia -= $request->jumlah_barang_dipinjam;
-        $barang->save();
-
-        return redirect()->back()->with('success', 'Form has been successfully recorded.');
-    } catch (\Exception $e) {
-        return redirect()->back()->with('error', 'Failed to record the form. Please try again.');
-    }
-    
-        return redirect()->route('pinjam')->with('success', 'Peminjaman berhasil diajukan!');
+            return redirect()->back()->with('success', 'Peminjaman berhasil diajukan!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Peminjaman tidak berhasil diajukan! Coba lagi');
+        }
     }    
 
     public function riwayat()

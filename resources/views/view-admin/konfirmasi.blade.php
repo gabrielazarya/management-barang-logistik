@@ -24,7 +24,7 @@
                     @endif
                     <div class="mt-6">
                         <div class="overflow-x-auto">
-                            <table class="min-w-full divide-y divide-gray-200">
+                            <table class="table-responsive min-w-full divide-y divide-gray-200 mt-2">
                                 <thead class="bg-gray-50">
                                     <tr>
                                         <th
