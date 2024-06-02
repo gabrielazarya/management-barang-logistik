@@ -1,8 +1,8 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary mx-auto ininavbar">
     <div class="container">
-        <button data-mdb-collapse-init class="navbar-toggler" type="button" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fas fa-bars"></i>
         </button>
 
@@ -21,7 +21,9 @@
                         href="{{ route('guestTentang') }}">TENTANG KAMI</a>
                 </li>
             </ul>
-            @include('view-guest.includes.login')
+            <div class="mt-3 mb-3">
+                @include('view-guest.includes.login')
+            </div>
         </div>
     </div>
 </nav>
