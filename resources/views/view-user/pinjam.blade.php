@@ -13,10 +13,6 @@
                         {{ __('Form Peminjaman Barang') }}
                     </h3>
 
-                    <div class="container">
-
-                    </div>
-
                     @if (session('success'))
                         <div id="notification" class="bg-green-500 text-white p-4 mb-4 rounded">
                             {{ session('success') }}

@@ -13,7 +13,6 @@
                         {{ __('Keseluruhan Data Barang Logistik') }}
                     </h3>
                     <div class="container mt-4">
-
                         <div class="mb-4">
                             <input type="text" id="searchInput" class="form-control"
                                 placeholder="Cari nama barang...">
@@ -25,11 +24,18 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Nama Barang</th>
-                                        <th id="tipeHeader" style="cursor: pointer;">Tipe Barang &#x2193;</th>
-                                        <!-- Clickable header for sorting -->
-                                        <th id="jumlahHeader" style="cursor: pointer;">Jumlah Barang Tersedia &#x2193;
-                                        </th> <!-- Clickable header for sorting -->
-                                        <th>Aksi</th>
+                                        <<<<<<< HEAD <th id="tipeHeader" style="cursor: pointer;">Tipe Barang &#x2193;
+                                            </th>
+                                            <!-- Clickable header for sorting -->
+                                            <th id="jumlahHeader" style="cursor: pointer;">Jumlah Barang Tersedia
+                                                &#x2193;
+                                            </th> <!-- Clickable header for sorting -->
+                                            =======
+                                            <th id="tipeHeader" style="cursor: pointer;">Tipe Barang &#x2193;</th>
+                                            <th id="jumlahHeader" style="cursor: pointer;">Jumlah Barang Tersedia
+                                                &#x2193;</th>
+                                            >>>>>>> 61e0ed9457d4a3958cb50a3ccc8e7fd7da0afff5
+                                            <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -62,7 +68,6 @@
         </div>
     </div>
 
-    <!-- Add JavaScript for Search and Sorting Functionality -->
     <script>
         document.getElementById('searchInput').addEventListener('keyup', function() {
             var input, filter, table, tr, td, i, txtValue;
@@ -72,7 +77,7 @@
             tr = table.getElementsByTagName('tr');
 
             for (i = 1; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName('td')[1]; // Use the second column (Nama Barang)
+                td = tr[i].getElementsByTagName('td')[1];
                 if (td) {
                     txtValue = td.textContent || td.innerText;
                     if (txtValue.toLowerCase().indexOf(filter) > -1) {
@@ -82,14 +87,14 @@
                     }
                 }
             }
-            updateNomorUrut(); // Update the numbering after filtering
+            updateNomorUrut();
         });
 
         function sortTable(n, isNumeric = false) {
             var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
             table = document.getElementById('barangTable');
             switching = true;
-            dir = "asc"; // Set the sorting direction to ascending initially
+            dir = "asc";
 
             while (switching) {
                 switching = false;
@@ -139,7 +144,7 @@
                 }
             }
 
-            updateNomorUrut(); // Update the numbering after sorting
+            updateNomorUrut();
 
             var header = document.getElementsByTagName('th')[n];
             if (dir == "asc") {
@@ -150,11 +155,11 @@
         }
 
         document.getElementById('jumlahHeader').addEventListener('click', function() {
-            sortTable(3, true); // Sorting based on the fourth column (Jumlah Barang Tersedia), numeric sorting
+            sortTable(3, true);
         });
 
         document.getElementById('tipeHeader').addEventListener('click', function() {
-            sortTable(2, false); // Sorting based on the third column (Tipe Barang), string sorting
+            sortTable(2, false);
         });
 
         function updateNomorUrut() {
@@ -170,7 +175,7 @@
         }
 
         window.onload = function() {
-            updateNomorUrut(); // Update numbering when the page loads
+            updateNomorUrut();
         };
     </script>
 </x-app-layout>

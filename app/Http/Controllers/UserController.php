@@ -46,7 +46,6 @@ class UserController extends Controller
 
     public function prosesPinjam(Request $request)
     {
-        // Validasi request
         $request->validate([
             'id_barang' => 'required|exists:barangs,id_barang',
             'jumlah_barang_dipinjam' => 'required|integer|min:1',
@@ -62,12 +61,9 @@ class UserController extends Controller
             'tanggal_pengembalian' => $request->tanggal_pengembalian,
             'status' => 'pending', 
         ]);
-        // Validate the request
 
-    // Retrieve the selected barang
     $barang = Barang::find($request->id_barang);
 
-    // Check if the requested quantity is available
     if ($request->jumlah_barang_dipinjam > $barang->jumlah_barang_tersedia) {
         return redirect()->back()->with('error', 'Jumlah yang dipesan melebihi jumlah barang yang tersedia.');
     }
@@ -81,42 +77,10 @@ class UserController extends Controller
 
     public function riwayat()
     {
-         // Ambil data peminjaman berdasarkan user yang login
         $userId = Auth::id();
         $pinjams = Pinjam::where('user_id', $userId)->with('barang')->get();
 
         return view('view-user.riwayat', compact('pinjams'));
-    }
-    public function notifikasi(Request $request)
-    {
-        // Validate the request
-        $request->validate([
-            'id_barang' => 'required|exists:barangs,id_barang',
-            'jumlah_barang_dipinjam' => 'required|integer|min:1',
-            'tanggal_pinjam' => 'required|date',
-            'tanggal_pengembalian' => 'required|date|after_or_equal:tanggal_pinjam',
-        ]);
-    
-        // Retrieve the selected barang
-        $barang = Barang::find($request->id_barang);
-    
-        // Check if the requested quantity is available
-        if ($request->jumlah_barang_dipinjam > $barang->jumlah_tersedia) {
-            return redirect()->back()->with('error', 'Jumlah yang dipesan melebihi jumlah barang yang tersedia.');
-        }
-    
-        try {
-            // Logic for processing the form submission
-            // For example, create a new Peminjaman record
-    
-            // Update the stock
-            $barang->jumlah_tersedia -= $request->jumlah_barang_dipinjam;
-            $barang->save();
-    
-            return redirect()->back()->with('success', 'Form has been successfully recorded.');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Failed to record the form. Please try again.');
-        }
     }
 
 }
