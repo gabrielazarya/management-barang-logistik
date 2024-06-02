@@ -80,7 +80,7 @@
                                             <td class="px-6 py-4 whitespace-nowrap">{{ $item->status }}</td>
                                             <td class="px-6 py-4 whitespace-nowrap">
                                                 <form
-                                                    action="{{ route('confirmBorrowing', ['id' => $item->user->user_id]) }}"
+                                                    action="{{ route('confirmBorrowing', ['id' => $item->id_pinjam]) }}"
                                                     method="POST" class="inline-block">
                                                     @csrf
                                                     @method('PATCH')
@@ -88,7 +88,7 @@
                                                         class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Konfirmasi</button>
                                                 </form>
                                                 <form
-                                                    action="{{ route('rejectBorrowing', ['id' => $item->user->user_id]) }}"
+                                                    action="{{ route('rejectBorrowing', ['id' => $item->id_pinjam]) }}"
                                                     method="POST" class="inline-block">
                                                     @csrf
                                                     @method('PATCH')
