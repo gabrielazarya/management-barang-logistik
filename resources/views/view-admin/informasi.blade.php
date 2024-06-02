@@ -17,25 +17,15 @@
                             <input type="text" id="searchInput" class="form-control"
                                 placeholder="Cari nama barang...">
                         </div>
-
                         <div class="table-responsive">
                             <table class="table table-striped" id="barangTable">
                                 <thead>
                                     <tr>
                                         <th>No</th>
                                         <th>Nama Barang</th>
-                                        <<<<<<< HEAD <th id="tipeHeader" style="cursor: pointer;">Tipe Barang &#x2193;
-                                            </th>
-                                            <!-- Clickable header for sorting -->
-                                            <th id="jumlahHeader" style="cursor: pointer;">Jumlah Barang Tersedia
-                                                &#x2193;
-                                            </th> <!-- Clickable header for sorting -->
-                                            =======
-                                            <th id="tipeHeader" style="cursor: pointer;">Tipe Barang &#x2193;</th>
-                                            <th id="jumlahHeader" style="cursor: pointer;">Jumlah Barang Tersedia
-                                                &#x2193;</th>
-                                            >>>>>>> 61e0ed9457d4a3958cb50a3ccc8e7fd7da0afff5
-                                            <th>Aksi</th>
+                                        <th id="tipeHeader" style="cursor: pointer;">Tipe Barang</th>
+                                        <th id="jumlahHeader" style="cursor: pointer;">Jumlah Barang Tersedia</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -62,7 +52,6 @@
                             </table>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
