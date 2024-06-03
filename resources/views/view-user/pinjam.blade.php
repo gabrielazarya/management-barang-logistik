@@ -13,6 +13,17 @@
                         {{ __('Form Peminjaman Barang') }}
                     </h3>
 
+                    <div class="mb-6 p-4 bg-gray-100 rounded border border-gray-200">
+                        <h4 class="text-md font-semibold mb-2">Aturan Peminjaman:</h4>
+                        <ul class="list-disc list-inside text-sm text-gray-700">
+                            <li>Pengguna wajib mengisi semua data dengan benar.</li>
+                            <li>Peminjaman hanya dapat dilakukan oleh pengguna yang terdaftar.</li>
+                            <li>Jumlah barang yang dipinjam tidak boleh melebihi stok yang tersedia.</li>
+                            <li>Pengguna harus menentukan tanggal peminjaman dan tanggal pengembalian.</li>
+                            <li>Barang harus dikembalikan tepat waktu untuk menghindari sanksi.</li>
+                        </ul>
+                    </div>
+
                     @if (session('success'))
                         <div id="notification" class="bg-green-500 text-white p-4 mb-4 rounded">
                             {{ session('success') }}
