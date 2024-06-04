@@ -13,9 +13,24 @@
                         {{ __('Keseluruhan Data Barang Logistik') }}
                     </h3>
                     <div class="container mt-4">
+                        <form class="ketersediaan-form" method="GET" action="{{ route('informasi') }}">
+                            <div class="form-group">
+                                <label for="tanggal_pinjam">Tanggal Pinjam:</label>
+                                <input type="date" id="tanggal_pinjam" name="tanggal_pinjam"
+                                    value="{{ $tanggal_pinjam }}" class="form-control">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="tanggal_pengembalian">Tanggal Pengembalian:</label>
+                                <input type="date" id="tanggal_pengembalian" name="tanggal_pengembalian"
+                                    value="{{ $tanggal_pengembalian }}" class="form-control">
+                            </div>
+
+                            <button type="submit" class="btn btn-sm btn-primary align-self-end">Cek Ketersediaan</button>
+                        </form>
+
                         <div class="mb-4">
-                            <input type="text" id="searchInput" class="form-control"
-                                placeholder="Cari nama barang...">
+                            <input type="text" id="searchInput" class="form-control" placeholder="Cari nama barang...">
                         </div>
                         <div class="table-responsive">
                             <table class="table table-striped" id="barangTable">
@@ -25,20 +40,22 @@
                                         <th>Nama Barang</th>
                                         <th id="tipeHeader" style="cursor: pointer;">Tipe Barang</th>
                                         <th id="jumlahHeader" style="cursor: pointer;">Jumlah Barang Tersedia</th>
+                                        <th id="jumlahstockHeader" style="cursor: pointer;">Total Barang</th> 
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($barangs as $barang)
+                                    @foreach ($items as $item)
                                         <tr>
                                             <td class="nomor-urut"></td>
-                                            <td>{{ $barang->nama_barang }}</td>
-                                            <td>{{ $barang->tipe_barang }}</td>
-                                            <td>{{ $barang->jumlah_barang_tersedia }}</td>
+                                            <td>{{ $item->nama_barang }}</td>
+                                            <td>{{ $item->tipe_barang }}</td>
+                                            <td>{{ $item->jumlah_tersedia }}</td>
+                                            <td>{{ $item->jumlah_barang_tersedia }}</td> <!-- Display total stock -->
                                             <td>
-                                                <a href="{{ route('editData', $barang->id_barang) }}"
+                                                <a href="{{ route('editData', $item->id_barang) }}"
                                                     class="btn btn-sm btn-primary">Edit</a>
-                                                <form action="{{ route('deleteData', $barang->id_barang) }}"
+                                                <form action="{{ route('deleteData', $item->id_barang) }}"
                                                     method="POST" style="display: inline;">
                                                     @csrf
                                                     @method('DELETE')
@@ -143,6 +160,10 @@
             }
         }
 
+        document.getElementById('jumlahstockHeader').addEventListener('click', function() {
+            sortTable(3, true);
+        });
+        
         document.getElementById('jumlahHeader').addEventListener('click', function() {
             sortTable(3, true);
         });
@@ -167,4 +188,6 @@
             updateNomorUrut();
         };
     </script>
+
+<link rel="stylesheet" href="{{ asset('css/ketersediaan.css') }}">
 </x-app-layout>
