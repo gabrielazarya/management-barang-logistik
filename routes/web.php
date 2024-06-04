@@ -6,7 +6,6 @@ use App\Http\Controllers\GuestController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Middleware\RoleMiddleware;
-use App\Http\Controllers\BarangController;
 
 // guest view
 Route::get('/', [GuestController::class, 'index'])->name('guestDashboard');
