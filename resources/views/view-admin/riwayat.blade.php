@@ -93,6 +93,7 @@
                                         <td class="px-6 py-4 whitespace-nowrap">{{ $pinjam->status }}</td>
                                     </tr>
                                 @endforeach
+                                {{ $pinjams->links() }}
                             </tbody>
                         </table>
                     </div>
