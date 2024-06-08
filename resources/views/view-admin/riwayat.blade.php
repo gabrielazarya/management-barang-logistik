@@ -19,7 +19,7 @@
                         <!-- Search input -->
                         <div class="mb-4">
                             <input type="text" id="searchInput" class="form-control"
-                                placeholder="Cari nama barang...">
+                                placeholder="Cari nama ID / Nama / Nama barang...">
                         </div>
                         <!-- Date pickers and search button -->
                         <div class="mb-4 ">
