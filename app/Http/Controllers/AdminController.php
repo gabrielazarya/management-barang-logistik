@@ -39,7 +39,7 @@ class AdminController extends Controller
 
     public function riwayat()
     {
-        $pinjams = Pinjam::with('barang', 'user')->paginate(20);
+        $pinjams = Pinjam::with('barang', 'user')->paginate(10);
 
         return view('view-admin.riwayat', compact('pinjams'));
     }

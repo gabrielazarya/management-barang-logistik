@@ -78,7 +78,7 @@ class UserController extends Controller
     public function riwayat()
     {
         $userId = Auth::id();
-        $pinjams = Pinjam::where('user_id', $userId)->with('barang')->paginate(20);
+        $pinjams = Pinjam::where('user_id', $userId)->with('barang')->paginate(10);
 
         return view('view-user.riwayat', compact('pinjams'));
     }
