@@ -34,52 +34,39 @@
                         </div>
                     @endif
 
-                    <form id="peminjamanForm" action="{{ route('prosesPinjam') }}" method="POST"
-                        onsubmit="return validateForm()">
+                    <form id="peminjamanForm" action="{{ route('prosesPinjam') }}" method="POST" onsubmit="return validateForm()">
                         @csrf
                         <input type="hidden" name="user_id" value="{{ auth()->id() }}">
                         <div class="mb-4">
-                            <label for="nama_peminjam" class="block text-sm font-medium text-gray-700">Nama
-                                Peminjam</label>
-                            <input type="text" name="nama_peminjam" id="nama_peminjam" class="mt-1 block w-full"
-                                value="{{ auth()->user()->name }}" disabled>
+                            <label for="nama_peminjam" class="block text-sm font-medium text-gray-700">Nama Peminjam</label>
+                            <input type="text" name="nama_peminjam" id="nama_peminjam" class="mt-1 block w-full" value="{{ auth()->user()->name }}" disabled>
                         </div>
                         <div class="mb-4">
                             <label for="id_barang" class="block text-sm font-medium text-gray-700">Nama Barang</label>
-                            <select name="id_barang" id="id_barang" required class="mt-1 block w-full"
-                                onchange="updateAvailableStock()">
+                            <select name="id_barang" id="id_barang" required class="mt-1 block w-full" onchange="updateAvailableStock()">
                                 <option value="" hidden>Pilih Barang</option>
                                 @foreach ($barangs as $barang)
-                                    <option value="{{ $barang->id_barang }}"
-                                        data-stock="{{ $barang->jumlah_barang_tersedia }}">
+                                    <option value="{{ $barang->id_barang }}" data-stock="{{ $barang->jumlah_barang_tersedia }}">
                                         {{ $barang->nama_barang }}
                                     </option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="mb-4">
-                            <label for="jumlah_barang_dipinjam"
-                                class="block text-sm font-medium text-gray-700">Jumlah</label>
-                            <input type="number" name="jumlah_barang_dipinjam" id="jumlah_barang_dipinjam"
-                                min="1" required class="mt-1 block w-full">
-                            <span id="available-stock" class="text-sm text-gray-600">Silahkan pilih barang terlebih
-                                dahulu.</span>
+                            <label for="jumlah_barang_dipinjam" class="block text-sm font-medium text-gray-700">Jumlah</label>
+                            <input type="number" name="jumlah_barang_dipinjam" id="jumlah_barang_dipinjam" min="1" required class="mt-1 block w-full">
+                            <span id="available-stock" class="text-sm text-gray-600">Silahkan pilih barang terlebih dahulu.</span>
                             <span id="error-message" class="text-sm text-red-600"></span>
                         </div>
                         <div class="mb-4">
-                            <label for="tanggal_pinjam" class="block text-sm font-medium text-gray-700">Tanggal
-                                Pinjam</label>
-                            <input type="date" name="tanggal_pinjam" id="tanggal_pinjam" required
-                                class="mt-1 block w-full">
+                            <label for="tanggal_pinjam" class="block text-sm font-medium text-gray-700">Tanggal Pinjam</label>
+                            <input type="date" name="tanggal_pinjam" id="tanggal_pinjam" required class="mt-1 block w-full">
                         </div>
                         <div class="mb-4">
-                            <label for="tanggal_pengembalian" class="block text-sm font-medium text-gray-700">Tanggal
-                                Pengembalian</label>
-                            <input type="date" name="tanggal_pengembalian" id="tanggal_pengembalian" required
-                                class="mt-1 block w-full">
+                            <label for="tanggal_pengembalian" class="block text-sm font-medium text-gray-700">Tanggal Pengembalian</label>
+                            <input type="date" name="tanggal_pengembalian" id="tanggal_pengembalian" required class="mt-1 block w-full">
                         </div>
-                        <button type="submit"
-                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                             Pinjam
                         </button>
                     </form>
@@ -93,8 +80,7 @@
     function updateAvailableStock() {
         const selectedBarang = document.getElementById('id_barang').selectedOptions[0];
         const stock = selectedBarang.getAttribute('data-stock');
-        document.getElementById('available-stock').textContent = stock ? `Jumlah tersedia: ${stock}` :
-            'Silahkan pilih barang terlebih dahulu.';
+        document.getElementById('available-stock').textContent = stock ? `Jumlah tersedia: ${stock}` : 'Silahkan pilih barang terlebih dahulu.';
         document.getElementById('error-message').textContent = ''; // Clear error message when item changes
     }
 
@@ -104,19 +90,25 @@
         const jumlah = parseInt(document.getElementById('jumlah_barang_dipinjam').value);
 
         if (jumlah > stock) {
-            document.getElementById('error-message').textContent =
-                'Jumlah yang diminta melebihi jumlah barang yang tersedia.';
+            document.getElementById('error-message').textContent = 'Jumlah yang diminta melebihi jumlah barang yang tersedia.';
             return false;
         }
         return true;
     }
 
     document.addEventListener('DOMContentLoaded', function() {
-        var notification = document.getElementById('notification');
+        const notification = document.getElementById('notification');
         if (notification) {
             setTimeout(function() {
                 notification.style.display = 'none';
             }, 3000); // Hide after 3 seconds
         }
+
+        const today = new Date();
+        const tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        const minDate = tomorrow.toISOString().split('T')[0];
+        document.getElementById('tanggal_pinjam').setAttribute('min', minDate);
+        document.getElementById('tanggal_pengembalian').setAttribute('min', minDate);
     });
 </script>
