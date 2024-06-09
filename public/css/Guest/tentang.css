@@ -1,5 +1,5 @@
 /* tentang.css */
-.section-layout-home{
+.section-layout-home {
     padding: 0;
 }
 
@@ -28,13 +28,13 @@
     max-width: 100%;
     height: auto;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 #about-us .img-fluid:hover {
     transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 #about-us .col-lg-6 {
@@ -47,11 +47,11 @@
 }
 
 .card {
-    border: 1px solid ;
+    border: 1px solid;
     border-radius: 2%;
     padding: 10px;
     margin-bottom: 15px;
-    box-shadow: 2px 2px 5px #9f1521; /* Box shadow with red color */
+    box-shadow: 2px 2px 5px #9f1521;
 }
 
 .card-body {

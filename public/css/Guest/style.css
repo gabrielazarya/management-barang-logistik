@@ -26,7 +26,7 @@ h1 {
 }
 
 .nav-item {
-    padding: 10px;
+    padding: 5px;
 }
 
 .navbar {
@@ -103,4 +103,18 @@ h1 {
 
 .footerhover:hover {
     color: rgb(172, 172, 172);
+}
+
+.card-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn:hover {
+    background-color: #7d101b;
+    color: #f8f8f8 !important;
 }

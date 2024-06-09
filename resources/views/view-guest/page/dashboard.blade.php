@@ -3,12 +3,12 @@
 @section('content')
     @include('view-guest.includes.landingpage')
     <div class="container">
-        <div class="section layout-home">
+        <div class="section layout-home mx-2">
             <div class="heading-home mb-2 text-center">Tentang Logistik</div>
             <p class="mb-4 text-center">Tentang Logistik Telkom University Surabaya</p>
             <div class="row mt-2">
                 <div class="col-xl-6 col-lg-12 col-md-6 col-sm-12">
-                    <div class="card mb-3">
+                    <div class="card mb-3 card-hover">
                         <div class="row g-0">
                             <div class="col-xl-5 col-lg-2 col-md-12 col-sm-12">
                                 <img src="{{ asset('images/home-tentang.png') }}" class="image-tentang img-fluid">
@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-12 col-md-6 col-sm-12">
-                    <div class="card mb-3">
+                    <div class="card mb-3 card-hover">
                         <div class="row g-0">
                             <div class="col-xl-5 col-lg-2 col-md-12 col-sm-12">
                                 <img src="{{ asset('images/home-tentang-2.png') }}" class="image-tentang img-fluid">
@@ -54,7 +54,7 @@
 
     <div class="bg-light">
         <div class="container">
-            <div class="section layout-home">
+            <div class="section layout-home mx-2">
                 <div class="text-center heading-home mb-2">Layanan Logistik</div>
                 <p class="text-center mb-4">Layanan Logistik Telkom University Surabaya</p>
                 <div class="row">
@@ -123,23 +123,23 @@
     </div>
 
     <div class="container">
-        <div class="section layout-home">
+        <div class="section layout-home mx-2">
             <div class="text-center heading-home mb-2">Cara Mengajukan Peminjam Barang</div>
             <p class="text-center mb-4">Cara Mengajukan Peminjaman Barang Logistik Telkom University Surabaya</p>
             <div class="row">
                 <div class="col-lg-3 col-lg-3 col-md-6 col-sm-12 text-center mb-2 mt-2">
-                    <div class="card">
+                    <div class="card card-hover">
                         <div class="card-body">
                             <h4 class="card-title" style="color: #9f1521">Step 1</h4>
                             <i class="fa fa-scroll mb-4 mt-4 cara-home"></i>
                             <p class="card-text">
-                                Lihat ketersediaan Barang yang akan di pinjam
+                                Lihat dengan teliti ketersediaan Barang yang akan di pinjam
                             </p>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-lg-3 col-md-6 col-sm-12 text-center mb-2 mt-2">
-                    <div class="card">
+                    <div class="card card-hover">
                         <div class="card-body">
                             <h4 class="card-title" style="color: #9f1521">Step 2</h4>
                             <i class="fa fa-pen mb-4 mt-4 cara-home"></i>
@@ -150,7 +150,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-lg-3 col-md-6 col-sm-12 text-center mb-2 mt-2">
-                    <div class="card">
+                    <div class="card card-hover">
                         <div class="card-body">
                             <h4 class="card-title" style="color: #9f1521">Step 3</h4>
                             <i class="fa fa-spinner mb-4 mt-4 cara-home"></i>
@@ -161,7 +161,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-lg-3 col-md-6 col-sm-12 text-center mb-2 mt-2">
-                    <div class="card">
+                    <div class="card card-hover">
                         <div class="card-body">
                             <h4 class="card-title" style="color: #9f1521">Step 4</h4>
                             <i class="fa fa-download mb-4 mt-4 cara-home"></i>
@@ -173,7 +173,7 @@
                 </div>
             </div>
             <div class="">
-                <a href="/pinjam" class="btn merah mt-4">Pinjam Barang</a>
+                <a href="/pinjam" class="btn merah mt-4 card-hover">Pinjam Barang</a>
             </div>
         </div>
     </div>
