@@ -8,6 +8,7 @@
 
     <title>{{ __('Peminjaman Barang Logistik') }}</title>
     <link rel="" href="{{ asset('images/logo-icon.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ asset('css/Guest/login.css') }}">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -21,7 +22,8 @@
     <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
         <div>
             <a href="/">
-                <img src="{{ asset('images/logo-telkom-university-surabaya.webp') }}" alt="" width="300px">
+                <img src="{{ asset('images/logo-telkom-university-surabaya.webp') }}" class="images-login"
+                    alt="" width="300px">
             </a>
         </div>
 
