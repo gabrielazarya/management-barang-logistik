@@ -117,6 +117,7 @@ class AdminController extends Controller
         $barang = Barang::findOrFail($id);
         $barang->delete();
 
-        return redirect()->route('informasi')->with('success', 'Barang berhasil dihapus.');
-    }
+        return redirect()->route('informasi')->with('delete', 'Barang berhasil dihapus.');
+    }  
+
 }

@@ -16,6 +16,12 @@
                         </div>
                     @endif
 
+                    <!-- Session flash for delete messages -->
+                    @if(session('delete'))
+                        <div class="alert alert-danger">
+                            {{ session('delete') }}
+                        </div>
+                    @endif
                     <h3 class="text-lg font-medium leading-6 text-gray-900">
                         {{ __('Keseluruhan Data Barang Logistik') }}
                     </h3>
