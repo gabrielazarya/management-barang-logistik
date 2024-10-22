@@ -9,6 +9,13 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
+                    <!-- Session flash for success messages -->
+                    @if(session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
                     <h3 class="text-lg font-medium leading-6 text-gray-900">
                         {{ __('Keseluruhan Data Barang Logistik') }}
                     </h3>
@@ -53,10 +60,8 @@
                                             <td>{{ $item->jumlah_tersedia }}</td>
                                             <td>{{ $item->jumlah_barang_tersedia }}</td> <!-- Display total stock -->
                                             <td>
-                                                <a href="{{ route('editData', $item->id_barang) }}"
-                                                    class="btn btn-sm btn-primary">Edit</a>
-                                                <form action="{{ route('deleteData', $item->id_barang) }}"
-                                                    method="POST" style="display: inline;">
+                                                <a href="{{ route('editData', $item->id_barang) }}" class="btn btn-sm btn-primary">Edit</a>
+                                                <form action="{{ route('deleteData', $item->id_barang) }}" method="POST" style="display: inline;">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-danger"
@@ -191,3 +196,4 @@
 
 <link rel="stylesheet" href="{{ asset('css/ketersediaan.css') }}">
 </x-app-layout>
+
