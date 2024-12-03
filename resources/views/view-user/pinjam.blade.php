@@ -13,17 +13,6 @@
                         {{ __('Form Peminjaman Barang') }}
                     </h3>
 
-                    <div class="mb-6 p-4 bg-gray-100 rounded border border-gray-200">
-                        <h4 class="text-md font-semibold mb-2">Aturan Peminjaman:</h4>
-                        <ul class="list-disc list-inside text-sm text-gray-700">
-                            <li>Pengguna wajib mengisi semua data dengan benar.</li>
-                            <li>Peminjaman hanya dapat dilakukan oleh pengguna yang terdaftar.</li>
-                            <li>Jumlah barang yang dipinjam tidak boleh melebihi stok yang tersedia.</li>
-                            <li>Pengguna harus menentukan tanggal peminjaman dan tanggal pengembalian.</li>
-                            <li>Barang harus dikembalikan tepat waktu untuk menghindari sanksi.</li>
-                        </ul>
-                    </div>
-
                     @if (session('success'))
                         <div id="notification" class="bg-green-500 text-white p-4 mb-4 rounded">
                             {{ session('success') }}
@@ -37,25 +26,48 @@
                     <form id="peminjamanForm" action="{{ route('prosesPinjam') }}" method="POST" onsubmit="return validateForm()">
                         @csrf
                         <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+                        
+                        <!-- Nama Peminjam -->
                         <div class="mb-4">
                             <label for="nama_peminjam" class="block text-sm font-medium text-gray-700">Nama Peminjam</label>
                             <input type="text" name="nama_peminjam" id="nama_peminjam" class="mt-1 block w-full" value="{{ auth()->user()->name }}" disabled>
                         </div>
+
+                        <!-- Tabel Barang -->
                         <div class="mb-4">
-                            <label for="id_barang" class="block text-sm font-medium text-gray-700">Nama Barang</label>
-                            <select name="id_barang" id="id_barang" required class="mt-1 block w-full" onchange="updateAvailableStock()">
-                                <option value="" hidden>Pilih Barang</option>
-                                @foreach ($barangs as $barang)
-                                    <option value="{{ $barang->id_barang }}" data-stock="{{ $barang->jumlah_barang_tersedia }}">
-                                        {{ $barang->nama_barang }}
-                                    </option>
-                                @endforeach
-                            </select>
+                            <label for="searchInput" class="block text-sm font-medium text-gray-700">Cari Barang</label>
+                            <input type="text" id="searchInput" class="mt-1 block w-full" placeholder="Ketik untuk mencari barang...">
                         </div>
+
+                        <div class="table-responsive mb-4" style="max-height: 200px; overflow-y: auto;">
+                            <table id="barangTable" class="table table-striped w-full">
+                                <thead>
+                                    <tr>
+                                        <th>Pilih</th>
+                                        <th>Nama Barang</th>
+                                        <th>Tipe Barang</th>
+                                        <th>Jumlah Barang Tersedia</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($barangs as $barang)
+                                        <tr>
+                                            <td>
+                                                <input type="radio" name="id_barang" value="{{ $barang->id_barang }}" data-stock="{{ $barang->jumlah_barang_tersedia }}" required>
+                                            </td>
+                                            <td>{{ $barang->nama_barang }}</td>
+                                            <td>{{ $barang->tipe_barang }}</td>
+                                            <td>{{ $barang->jumlah_barang_tersedia }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Jumlah dan Tanggal -->
                         <div class="mb-4">
                             <label for="jumlah_barang_dipinjam" class="block text-sm font-medium text-gray-700">Jumlah</label>
                             <input type="number" name="jumlah_barang_dipinjam" id="jumlah_barang_dipinjam" min="1" required class="mt-1 block w-full">
-                            <span id="available-stock" class="text-sm text-gray-600">Silahkan pilih barang terlebih dahulu.</span>
                             <span id="error-message" class="text-sm text-red-600"></span>
                         </div>
                         <div class="mb-4">
@@ -66,6 +78,7 @@
                             <label for="tanggal_pengembalian" class="block text-sm font-medium text-gray-700">Tanggal Pengembalian</label>
                             <input type="date" name="tanggal_pengembalian" id="tanggal_pengembalian" required class="mt-1 block w-full">
                         </div>
+
                         <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                             Pinjam
                         </button>
@@ -74,41 +87,33 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // Pencarian di tabel
+        document.getElementById('searchInput').addEventListener('keyup', function() {
+            const filter = this.value.toLowerCase();
+            const rows = document.querySelectorAll('#barangTable tbody tr');
+            rows.forEach(row => {
+                const namaBarang = row.cells[1].textContent.toLowerCase();
+                row.style.display = namaBarang.includes(filter) ? '' : 'none';
+            });
+        });
+
+        // Validasi jumlah barang
+        function validateForm() {
+            const selectedBarang = document.querySelector('input[name="id_barang"]:checked');
+            if (!selectedBarang) {
+                document.getElementById('error-message').textContent = 'Silahkan pilih barang.';
+                return false;
+            }
+
+            const stock = parseInt(selectedBarang.getAttribute('data-stock'));
+            const jumlah = parseInt(document.getElementById('jumlah_barang_dipinjam').value);
+            if (jumlah > stock) {
+                document.getElementById('error-message').textContent = 'Jumlah yang diminta melebihi jumlah barang yang tersedia.';
+                return false;
+            }
+            return true;
+        }
+    </script>
 </x-app-layout>
-
-<script>
-    function updateAvailableStock() {
-        const selectedBarang = document.getElementById('id_barang').selectedOptions[0];
-        const stock = selectedBarang.getAttribute('data-stock');
-        document.getElementById('available-stock').textContent = stock ? `Jumlah tersedia: ${stock}` : 'Silahkan pilih barang terlebih dahulu.';
-        document.getElementById('error-message').textContent = ''; // Clear error message when item changes
-    }
-
-    function validateForm() {
-        const selectedBarang = document.getElementById('id_barang').selectedOptions[0];
-        const stock = parseInt(selectedBarang.getAttribute('data-stock'));
-        const jumlah = parseInt(document.getElementById('jumlah_barang_dipinjam').value);
-
-        if (jumlah > stock) {
-            document.getElementById('error-message').textContent = 'Jumlah yang diminta melebihi jumlah barang yang tersedia.';
-            return false;
-        }
-        return true;
-    }
-
-    document.addEventListener('DOMContentLoaded', function() {
-        const notification = document.getElementById('notification');
-        if (notification) {
-            setTimeout(function() {
-                notification.style.display = 'none';
-            }, 3000); // Hide after 3 seconds
-        }
-
-        const today = new Date();
-        const tomorrow = new Date(today);
-        tomorrow.setDate(tomorrow.getDate() + 1);
-        const minDate = tomorrow.toISOString().split('T')[0];
-        document.getElementById('tanggal_pinjam').setAttribute('min', minDate);
-        document.getElementById('tanggal_pengembalian').setAttribute('min', minDate);
-    });
-</script>

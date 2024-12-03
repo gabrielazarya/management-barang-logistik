@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Barang;
 use App\Models\Pinjam;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\Notifications\PeminjamanNotification;
 
 class AdminController extends Controller
 {
@@ -23,19 +25,30 @@ class AdminController extends Controller
 
     public function confirmBorrowing($id)
     {
-        $pinjam = Pinjam::findOrFail($id);
-        $pinjam->update(['status' => 'terima']);
-
+        $pinjam = Pinjam::with('barang', 'user')->findOrFail($id);
+        $pinjam->status = 'diterima';
+        $pinjam->admin_name = auth()->user()->name;
+        $pinjam->save();
+    
+        $message = "Peminjaman Barang {$pinjam->barang->nama_barang} Berhasil di Konfirmasi!";
+        $pinjam->user->notify(new PeminjamanNotification($message));
+    
         return redirect()->route('konfirmasi')->with('success', 'Peminjaman dikonfirmasi!');
     }
-
+    
     public function rejectBorrowing($id)
     {
-        $pinjam = Pinjam::findOrFail($id);
-        $pinjam->update(['status' => 'tolak']);
-
+        $pinjam = Pinjam::with('barang', 'user')->findOrFail($id);
+        $pinjam->status = 'ditolak';
+        $pinjam->admin_name = auth()->user()->name;
+        $pinjam->save();
+    
+        $message = "Peminjaman Barang {$pinjam->barang->nama_barang} Ditolak.";
+        $pinjam->user->notify(new PeminjamanNotification($message));
+    
         return redirect()->route('konfirmasi')->with('error', 'Peminjaman ditolak!');
     }
+
 
     public function riwayat()
     {
