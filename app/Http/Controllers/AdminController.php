@@ -31,7 +31,6 @@ class AdminController extends Controller
         $pinjam->save();
     
         $message = "Peminjaman Barang {$pinjam->barang->nama_barang} Berhasil di Konfirmasi!";
-        $pinjam->user->notify(new PeminjamanNotification($message));
     
         return redirect()->route('konfirmasi')->with('success', 'Peminjaman dikonfirmasi!');
     }
@@ -44,7 +43,6 @@ class AdminController extends Controller
         $pinjam->save();
     
         $message = "Peminjaman Barang {$pinjam->barang->nama_barang} Ditolak.";
-        $pinjam->user->notify(new PeminjamanNotification($message));
     
         return redirect()->route('konfirmasi')->with('error', 'Peminjaman ditolak!');
     }
