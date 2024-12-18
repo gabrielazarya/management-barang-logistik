@@ -30,6 +30,7 @@ Route::get('/ketersediaan', [UserController::class, 'ketersediaan'])->name('kete
 Route::get('/pinjam', [UserController::class, 'pinjam'])->name('pinjam')->middleware(RoleMiddleware::class . ':user');
 Route::post('/pinjam', [UserController::class, 'prosesPinjam'])->name('prosesPinjam')->middleware(RoleMiddleware::class . ':user');
 Route::get('/riwayat-peminjaman', [UserController::class, 'riwayat'])->name('userRiwayat')->middleware(RoleMiddleware::class . ':user');
+Route::get('/cetak-peminjaman/{id_pinjam}', [UserController::class, 'cetakPDF'])->name('cetakPeminjaman')->middleware(RoleMiddleware::class . ':user');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

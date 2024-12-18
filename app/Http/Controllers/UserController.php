@@ -8,6 +8,7 @@ use App\Models\Pinjam;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use PDF;
 
 class UserController extends Controller
 {
@@ -82,4 +83,17 @@ class UserController extends Controller
 
         return view('view-user.riwayat', compact('pinjams'));
     }
+
+   public function cetakPDF($id_pinjam)
+{
+    $cetak = Pinjam::with(['user', 'barang'])->find($id_pinjam);
+
+    if (!$cetak) {
+        abort(404, 'Data tidak ditemukan.');
+    }
+
+    $pdf = PDF::loadView('pinjam.surat', compact('cetak'));
+    return $pdf->stream("Surat_Peminjaman_{$cetak->id_pinjam}.pdf");
+}
+
 }

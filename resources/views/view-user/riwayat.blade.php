@@ -40,19 +40,25 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                                @foreach ($pinjams as $pinjam)
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">{{ $loop->iteration }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">{{ $pinjam->user->name }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">{{ $pinjam->barang->nama_barang }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">{{ $pinjam->jumlah_barang_dipinjam }}
-                                        </td>
-                                        <td class="px-6 py-4 whitespace-nowrap">{{ $pinjam->tanggal_pinjam }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">{{ $pinjam->tanggal_pengembalian }}</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">{{ $pinjam->status }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
+                            @foreach ($pinjams as $pinjam)
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ $loop->iteration }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ $pinjam->user->name }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ $pinjam->barang->nama_barang }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ $pinjam->jumlah_barang_dipinjam }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ $pinjam->tanggal_pinjam }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ $pinjam->tanggal_pengembalian }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ $pinjam->status }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <a href="{{ route('cetakPeminjaman', $pinjam->id_pinjam) }}"
+                                            class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700">
+                                            Cetak PDF
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+
                         </table>
                         {{ $pinjams->links() }}
                     </div>
