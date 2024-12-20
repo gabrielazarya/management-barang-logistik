@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory; // Ensure this line is present
 use Illuminate\Database\Eloquent\Model;
 
 class Barang extends Model
