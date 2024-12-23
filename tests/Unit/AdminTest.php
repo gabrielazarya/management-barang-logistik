@@ -14,7 +14,7 @@ class AdminTest extends TestCase
 
     protected function actingAsAdmin()
     {
-        $admin = User::factory()->create(['role' => 'admin']);
+        $admin = User::factory()->create(['role' => 'admin', 'email' => 'mop@gmail.com', 'password' => bcrypt('mop321')]);
         $this->actingAs($admin);
     }
 
@@ -74,13 +74,9 @@ class AdminTest extends TestCase
     {
         $this->actingAsAdmin();
 
-        $barang = Barang::factory()->create([
-            'nama_barang' => 'Barang Contoh',
-            'tipe_barang' => 'Elektronik',
-            'jumlah_barang_tersedia' => 10,
-        ]);
+        $barang = Barang::where('nama_barang', 'Kursi Lipat')->first(); // Find the barang by name
 
-        $response = $this->delete("/barang/{$barang->id}");
+        $response = $this->delete("/barang/nama/{$barang->nama_barang}"); // Delete by name
 
         $response->assertStatus(302);
         $this->assertDeleted($barang);
