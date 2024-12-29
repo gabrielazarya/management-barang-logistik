@@ -4,7 +4,7 @@ namespace Tests\Unit;
 
 use Tests\TestCase;
 
-class GuestControllerTest extends TestCase
+class GuestTest extends TestCase
 {
     public function test_guest_can_access_homepage()
     {

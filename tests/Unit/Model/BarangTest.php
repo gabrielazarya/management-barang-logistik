@@ -39,11 +39,8 @@ class BarangTest extends TestCase
         // Pastikan ada barang di database
         $this->assertNotNull($barang, "Barang tidak ditemukan di database.");
 
-        // Ambil user yang ada di database (misalnya user pertama)
-        $user = User::factory()->create([
-            'email' => 'dimas@gmail.com',
-            'password' => bcrypt('dimas321'),
-        ]);
+        // Ambil user yang ada di database dengan email 'dimas@gmail.com'
+        $user = User::where('email', 'dimas@gmail.com')->first();
 
         // Pastikan ada user di database
         $this->assertNotNull($user, "User tidak ditemukan di database.");
@@ -51,7 +48,7 @@ class BarangTest extends TestCase
         // Membuat peminjaman menggunakan barang yang ada di database
         $pinjam = Pinjam::create([
             'user_id' => $user->id,
-            'nama_barang' => $barang->nama_barang='Kursi Lipat',
+            'nama_barang' => $barang->nama_barang,
             'jumlah_barang_dipinjam' => 2,
             'tanggal_pinjam' => now(),
             'tanggal_pengembalian' => now()->addDays(7),
