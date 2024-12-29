@@ -72,20 +72,39 @@ class RoleMiddlewareTest extends TestCase
     $this->assertEquals(302, $response->getStatusCode());
     $this->assertEquals(route('login'), $response->headers->get('Location'));
 }
-    public function test_middleware_allows_multiple_roles()
-    {
-        // Simulasikan user dengan role 'user'
-        Auth::shouldReceive('user')
-            ->andReturn((object) ['role' => 'user']);
+public function test_middleware_denied_access_for_user_role_on_admin_route()
+{
+    // Simulasikan user dengan role 'user'
+    Auth::shouldReceive('user')
+        ->andReturn((object) ['role' => 'user']);
 
-        $middleware = new RoleMiddleware();
+    $middleware = new RoleMiddleware();
 
-        $request = Request::create('/ketersediaan', 'GET');
+    $request = Request::create('/informasi', 'GET');
 
-        $response = $middleware->handle($request, function ($request) {
-            return response('OK', 200);
-        }, 'admin', 'user');
+    $response = $middleware->handle($request, function ($request) {
+        return response('OK', 200);
+    }, 'admin');
 
-        $this->assertEquals(200, $response->getStatusCode());
-    }
+    $this->assertEquals(302, $response->getStatusCode());
+    $this->assertEquals(route('login'), $response->headers->get('Location'));
+}
+
+public function test_middleware_denied_access_for_admin_role_on_user_route()
+{
+    // Simulasikan user dengan role 'admin'
+    Auth::shouldReceive('user')
+        ->andReturn((object) ['role' => 'admin']);
+
+    $middleware = new RoleMiddleware();
+
+    $request = Request::create('/ketersediaan', 'GET');
+
+    $response = $middleware->handle($request, function ($request) {
+        return response('OK', 200);
+    }, 'user');
+
+    $this->assertEquals(302, $response->getStatusCode());
+    $this->assertEquals(route('login'), $response->headers->get('Location'));
+}
 }
