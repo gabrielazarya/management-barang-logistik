@@ -29,7 +29,12 @@
                 <input id="remember_me" type="checkbox"
                     class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
                 <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                <br>
             </label>
+            <a href="https://satu.telkomuniversity.ac.id/auth/forgot-password"
+            class="text-sm text-indigo-900 hover:text-red-900 block mt-1">
+            {{ __('Forgot your password?') }}
+            </a>
         </div>
 
         <div class="flex items-center justify-end mt-4">
