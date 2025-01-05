@@ -76,7 +76,7 @@
                         </div>
                         <div class="mb-4">
                             <label for="tanggal_pengembalian" class="block text-sm font-medium text-gray-700">Tanggal Pengembalian</label>
-                            <input type="date" name="tanggal_pengembalian" id="tanggal_pengembalian" required class="mt-1 block w-full">
+                            <input type="date" name="tanggal_pengembalian" id="tanggal_pengembalian" required class="mt-1 block w-full" disabled>
                         </div>
 
                         <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
@@ -89,6 +89,45 @@
     </div>
 
     <script>
+        // Set minimal tanggal pada "Tanggal Pinjam"
+        const today = new Date().toISOString().split('T')[0];
+        const tanggalPinjamInput = document.getElementById('tanggal_pinjam');
+        const tanggalPengembalianInput = document.getElementById('tanggal_pengembalian');
+
+        tanggalPinjamInput.setAttribute('min', today);
+
+        // Nonaktifkan "Tanggal Pengembalian" hingga "Tanggal Pinjam" diisi
+        tanggalPengembalianInput.disabled = true;
+
+        // Event listener untuk "Tanggal Pinjam"
+        tanggalPinjamInput.addEventListener('change', function () {
+            const tanggalPinjam = this.value;
+
+            if (tanggalPinjam) {
+                // Aktifkan "Tanggal Pengembalian" jika "Tanggal Pinjam" sudah diisi
+                tanggalPengembalianInput.disabled = false;
+
+                // Set minimal tanggal pada "Tanggal Pengembalian"
+                tanggalPengembalianInput.setAttribute('min', tanggalPinjam);
+            } else {
+                // Nonaktifkan "Tanggal Pengembalian" jika "Tanggal Pinjam" kosong
+                tanggalPengembalianInput.disabled = true;
+            }
+        });
+
+        // Validasi saat form dikirim
+        document.getElementById('peminjamanForm').addEventListener('submit', function (event) {
+            const tanggalPinjam = tanggalPinjamInput.value;
+            const tanggalPengembalian = tanggalPengembalianInput.value;
+
+            if (tanggalPinjam && tanggalPengembalian) {
+                if (tanggalPengembalian < tanggalPinjam) {
+                    event.preventDefault();
+                    alert('Tanggal Pengembalian tidak boleh sebelum Tanggal Pinjam.');
+                }
+            }
+        });
+
         // Pencarian di tabel
         document.getElementById('searchInput').addEventListener('keyup', function() {
             const filter = this.value.toLowerCase();
